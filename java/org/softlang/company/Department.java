@@ -5,8 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A department has a name, a manager and a list of subunits
- * 
+ * A department has a name, a manager, employees, and subdepartments.
  */
 public class Department implements Serializable {
 
