@@ -1,10 +1,9 @@
-none:
+i=-i.:../haskellNovice
 
 test:
-	@echo "main" | ghci -v0 Main.hs > log
-	@diff log baseline
-	@echo Test succeeded.
-	@make clean
+	echo "main" | ghci -v0 ${i} Main > log
+	diff log baseline
+	rm log
 
 clean:
-	@rm -f log
+	rm -f log

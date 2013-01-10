@@ -7,7 +7,7 @@ import Cut
 main 
  = do
       -- De-serialize sample company via read
-      txt <- readFile "sampleCompany.txt"
+      txt <- readFile "../haskellNovice/sampleCompany.txt"
       let company = read txt
 
       -- Test that show followed by read returns the same company
