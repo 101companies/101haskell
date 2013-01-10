@@ -3,11 +3,11 @@ module Total where
 import Company
 
 total :: Company -> Float
-total (Company n ds) = sum (map dep ds)
+total (Company n ds) = sum (map totalD ds)
   where
-   dep :: Department -> Float
-   dep (Department _ m ds es)
-     = sum (emp m : map dep ds ++ map emp es)
-     where
-       emp :: Employee -> Float
-       emp (Employee _ _ s) = s
+    totalD :: Department -> Float
+    totalD (Department _ m ds es)
+      = sum (totalE m : map totalD ds ++ map totalE es)
+      where
+        totalE :: Employee -> Float
+        totalE (Employee _ _ s) = s
