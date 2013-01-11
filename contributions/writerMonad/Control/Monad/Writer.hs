@@ -23,7 +23,7 @@ import Data.Monoid
 
 -- A Writer computation consists of output and a value.
 
-newtype Writer w a = Writer (a, w)
+newtype Writer w a = Writer { runWriter :: (a, w) }
 
 
 -- We set up the Monad type-class instance for writers.
@@ -40,9 +40,3 @@ instance Monoid w => Monad (Writer w)
 
 tell :: w -> Writer w ()
 tell w = Writer ((), w)
-
-
--- We run a computation as follows.
-
-runWriter :: Writer w a -> (a, w)
-runWriter (Writer (a, w)) = (a, w)
