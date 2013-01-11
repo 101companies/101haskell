@@ -1,2 +1,4 @@
 [LogEntry {name = "Craig", oldSalary = 123456.0, newSalary = 61728.0},LogEntry {name = "Erik", oldSalary = 12345.0, newSalary = 6172.5},LogEntry {name = "Ralf", oldSalary = 1234.0, newSalary = 617.0},LogEntry {name = "Ray", oldSalary = 234567.0, newSalary = 117283.5},LogEntry {name = "Klaus", oldSalary = 23456.0, newSalary = 11728.0},LogEntry {name = "Karl", oldSalary = 2345.0, newSalary = 1172.5},LogEntry {name = "Joe", oldSalary = 2344.0, newSalary = 1172.0}]
+[-117283.5,-61728.0,-11728.0,-6172.5,-1172.5,-1172.0,-617.0]
 -6172.5
+-28553.355

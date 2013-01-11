@@ -1,7 +1,7 @@
 module Log where
 
 import Data.List (sort)
-import Math.Statistics (median)
+import Math.Statistics (median, mean)
 
 
 -- Logs are lists of log entries.
@@ -20,9 +20,22 @@ data LogEntry =
   deriving (Show)
 
 
--- Given a log, compute the median of salary delta.
+-- Given a log, project it to the sorted deltas of changes.
 
-deltaMedian :: Log -> Float
-deltaMedian log = median (sort (map delta log))
+log2deltas :: Log -> [Float]
+log2deltas = sort . map delta
   where
     delta entry = newSalary entry - oldSalary entry
+
+
+-- Given a log, compute the median of salary deltas.
+
+log2median :: Log -> Float
+log2median = median . log2deltas
+
+
+-- Given a log, compute the mean of salary deltas.
+
+log2mean :: Log -> Float
+log2mean = mean . log2deltas
+

@@ -15,4 +15,6 @@ main = do
 
       -- Print log as well as median of deltas
       print log
-      print $ deltaMedian log
+      print $ log2deltas log
+      print $ log2median log
+      print $ log2mean log
