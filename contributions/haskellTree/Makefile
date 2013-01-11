@@ -1,0 +1,8 @@
+i=-i.:../haskellComposition
+test:
+	echo "main" | ghci -v0 ${i} Main.hs > log
+	diff log baseline
+	rm log
+
+clean:
+	rm -f log
