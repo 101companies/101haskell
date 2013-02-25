@@ -3,14 +3,7 @@ module Total where
 import Company
 
 total :: Company -> Float
-total (n, ds) = totalDs ds
-
-totalDs :: [Department] -> Float
-totalDs [] = 0
-totalDs (d:ds) = totalD d + totalDs ds
-
-totalD :: Department -> Float
-totalD (_, m, es) = totalE m + totalEs es
+total (n, es) = totalEs es
 
 totalEs :: [Employee] -> Float
 totalEs [] = 0

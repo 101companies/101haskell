@@ -3,14 +3,7 @@ module Cut where
 import Company
 
 cut :: Company -> Company
-cut (n, ds) = (n, (cutDs ds))
-
-cutDs :: [Department] -> [Department]
-cutDs [] = []
-cutDs (d:ds) = cutD d : cutDs ds
-
-cutD :: Department -> Department
-cutD (n, m, es) = (n, cutE m, cutEs es)
+cut (n, es) = (n, (cutEs es))
 
 cutEs :: [Employee] -> [Employee]
 cutEs [] = []
