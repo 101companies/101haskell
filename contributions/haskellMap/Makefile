@@ -1,8 +1,8 @@
-i=-i.:../haskellNovice
+i=../haskellFlat
 
 test:
-	echo "main" | ghci -v0 ${i} Main > log
-	diff log baseline
+	echo "main" | ghci -v0 -i.:${i} Main > log
+	diff log ${i}/baseline
 	rm log
 
 clean:
