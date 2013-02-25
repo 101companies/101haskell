@@ -10,7 +10,7 @@ main
  = do
 
       -- De-serialize sample company via read
-      txt <- readFile "../haskellComposition/sampleCompany.txt"
+      txt <- getContents
       let company = read txt
 
       -- Project to tree of floats

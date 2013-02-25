@@ -1,8 +1,14 @@
-i = -i.:StrategyLib
-test:
-	echo "main" | ghci -v0 ${i} Main.hs > log
-	diff log baseline
-	rm log
+strafunski = StrategyLib/Data/Generics/Strafunski/StrategyLib
+
+build:
+	ghc -i.:StrategyLib Main.hs
+
+test: build
+	./Main < sampleCompany.txt > log
+	diff baseline log
+	make clean
 
 clean:
-	rm -f log
+	rm -f log *.o *.hi Main ${strafunski}/*.hi ${strafunski}/*.o
+
+

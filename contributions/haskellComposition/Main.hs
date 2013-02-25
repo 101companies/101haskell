@@ -10,7 +10,7 @@ main
  = do
 
       -- De-serialize sample company via read
-      txt <- readFile "sampleCompany.txt"
+      txt <- getContents
       let company = read txt
 
       -- Test that salaries align with hierarchy

@@ -12,7 +12,7 @@ main
  = do
 
       -- De-serialize sample company via read
-      txt <- readFile "../haskellComposition/sampleCompany.txt"
+      txt <- getContents
       let (company::Company) = read txt
 
       -- Convert to universal representation

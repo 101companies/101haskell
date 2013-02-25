@@ -1,10 +1,11 @@
-origin=../haskellStarter
+build:
+	ghc Main.hs
 
-test:
-	cp ${origin}/sampleCompany.txt .
-	echo "main" | ghci -v0 -i.:${origin} ${origin}/Main.hs > log
-	diff ${origin}/baseline log
+test: build
+	./Main < sampleCompany.txt > log
+	diff baseline log
 	make clean
 
 clean:
-	rm -f sampleCompany.txt log
+	rm -f log *.o *.hi Main
+

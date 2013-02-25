@@ -3,7 +3,7 @@ Company {
   getEmployees = [ 
     Employee { getEmployeeName = "Craig", getAddress = "Redmond", getSalary = 123456 },
     Employee { getEmployeeName = "Erik", getAddress = "Utrecht", getSalary = 12345 },
-    Employee { getEmployeeName = "Ralf", getAddress = "Koblenz", getSalary = 12342 }, 
+    Employee { getEmployeeName = "Ralf", getAddress = "Koblenz", getSalary = 1234 }, 
     Employee { getEmployeeName = "Ray", getAddress = "Redmond", getSalary = 234567 },
     Employee { getEmployeeName = "Klaus", getAddress = "Boston", getSalary = 23456 },
     Employee { getEmployeeName = "Karl", getAddress = "Riga", getSalary = 2345 },
