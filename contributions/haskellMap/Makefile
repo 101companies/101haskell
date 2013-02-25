@@ -1,9 +1,9 @@
-i=../haskellStarter
+origin=../haskellStarter
 
 test:
-	cp ${i}/sampleCompany.txt .
-	echo "main" | ghci -v0 -i.:${i} ${i}/Main.hs > log
-	diff ${i}/baseline log
+	cp ${origin}/sampleCompany.txt .
+	echo "main" | ghci -v0 -i.:${origin} ${origin}/Main.hs > log
+	diff ${origin}/baseline log
 	make clean
 
 clean:
