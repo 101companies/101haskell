@@ -1,0 +1,11 @@
+Company 
+  "Acme Corporation"
+  [ 
+    Employee "Craig" "Redmond" 123456,
+    Employee "Erik" "Utrecht" 12345,
+    Employee "Ralf" "Koblenz" 12342,
+    Employee "Ray" "Redmond" 234567,
+    Employee "Klaus" "Boston" 23456,
+    Employee "Karl" "Riga" 2345,
+    Employee "Joe" "Wifi City" 2344
+  ] 

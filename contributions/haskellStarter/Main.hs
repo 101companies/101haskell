@@ -7,7 +7,7 @@ import Cut
 main 
  = do
       -- De-serialize sample company via read
-      txt <- readFile "../haskellFlat/sampleCompany.txt"
+      txt <- readFile "sampleCompany.txt"
       let company = read txt
 
       -- Test that show followed by read returns the same company
@@ -16,5 +16,5 @@ main
       -- Total all salaries
       print $ total company
 
-      -- Cut all salaries
+      -- Cut all salaries and total resulting company
       print $ total (cut company)
