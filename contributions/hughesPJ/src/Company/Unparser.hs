@@ -1,6 +1,6 @@
-module Unparser where
+module Company.Unparser where
 
-import Company
+import Company.Data
 import Text.PrettyPrint.HughesPJ
 
 unparse :: Company -> Doc
@@ -8,7 +8,7 @@ unparse (Company n ds) =
   bracy "company" n (vcat (map unparseD ds))
   where
     bracy :: String -> String -> Doc -> Doc
-    bracy k n d = 
+    bracy k n d =
          text k <+> doubleQuotes (text n) <+> text "{"
       $$ nest 2 d
       $$ text "}"

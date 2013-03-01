@@ -1,9 +1,9 @@
 module Main where
 
-import Company
-import Unparser
+import Company.Data
+import Company.Unparser
 
-main 
+main
  = do
 
       -- De-serialize sample company via read

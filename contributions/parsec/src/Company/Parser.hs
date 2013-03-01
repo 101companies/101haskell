@@ -2,16 +2,16 @@
 -- 7 July 2011, 23h00
 -- GTTSE 2011, Braga, Portugal
 
-module Parser where
+module Company.Parser where
 
-import Company
+import Company.Data
 
 import Control.Applicative hiding (many, (<|>))
 import Text.Parsec
 
 
 parseCompany :: String -> Either ParseError Company
-parseCompany = runP (spaces *> pCompany <* eof) () 
+parseCompany = runP (spaces *> pCompany <* eof) ()
                "input"
 
 type P = Parsec String ()

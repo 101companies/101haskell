@@ -13,12 +13,12 @@ maintainer:          rlaemmel@gmail.com
 -- copyright:
 -- category:
 build-type:          Simple
-cabal-version:       >=1.8
+cabal-version:       >=1.6
 
 executable strafunski
   main-is:             Main.hs
   -- other-modules:
-  build-depends:       base >= 4.6 && < 5.0,
+  build-depends:       base >= 4.4 && < 5.0,
                        mtl >= 2.1,
                        directory >= 1.2,
                        syb >= 0.3

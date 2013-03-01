@@ -1,18 +1,18 @@
 module Main where
 
-import Company
-import Total
-import Cut
-import Parser
+import Company.Data
+import Company.Total
+import Company.Cut
+import Company.Parser
 
-main 
+main
  = do
       -- Parse sample company
       txt <- readFile "sampleCompany.txt"
       let either = parseCompany txt
 
       -- Handle parse error
-      case either of 
+      case either of
        (Left e) -> print e
        (Right company) -> do
 

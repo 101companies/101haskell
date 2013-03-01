@@ -13,10 +13,10 @@ maintainer:          rlaemmel@gmail.com
 -- copyright:
 -- category:
 build-type:          Simple
-cabal-version:       >=1.8
+cabal-version:       >=1.6
 
 executable HaskellComposition
   hs-source-dirs:   src src/Company
   main-is:          Main.hs
   -- other-modules:
-  build-depends:       base >= 4.6 && < 5.0
+  build-depends:       base >= 4.4 && < 5.0

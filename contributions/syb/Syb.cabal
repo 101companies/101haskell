@@ -13,11 +13,11 @@ maintainer:          rlaemmel@gmail.com
 -- copyright:
 -- category:
 build-type:          Simple
-cabal-version:       >=1.8
+cabal-version:       >=1.6
 
 executable syb
   main-is:             Main.hs
   -- other-modules:
-  build-depends:       base >= 4.6 && < 5.0,
+  build-depends:       base >= 4.4 && < 5.0,
                        syb >= 0.3
   hs-source-dirs:      src

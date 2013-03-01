@@ -1,7 +1,7 @@
-module Cut where
+module Company.Cut where
 
-import Company
-import Log
+import Company.Data
+import Company.Log
 import Control.Monad.Writer
 
 
@@ -9,7 +9,7 @@ import Control.Monad.Writer
 
 cut :: Company -> (Company, Log)
 cut (Company n ds)
-  = let (ds',log) = runWriter (mapM cutD ds) in 
+  = let (ds',log) = runWriter (mapM cutD ds) in
       (Company n ds', log)
   where
     cutD :: Department -> Writer Log Department
@@ -21,9 +21,9 @@ cut (Company n ds)
       where
         cutE :: Employee -> Writer Log Employee
         cutE (Employee n a s) =
-             let 
+             let
                  s' = s/2
-                 log = [ LogEntry { 
+                 log = [ LogEntry {
                            name = n,
                            oldSalary = s,
                            newSalary = s'
@@ -37,7 +37,7 @@ cut (Company n ds)
 
 cut' :: Company -> (Company, Log)
 cut' (Company n ds)
-  = let (ds',log) = runWriter (mapM cutD ds) in 
+  = let (ds',log) = runWriter (mapM cutD ds) in
       (Company n ds', log)
   where
     cutD :: Department -> Writer Log Department
@@ -50,9 +50,9 @@ cut' (Company n ds)
       where
         cutE :: Employee -> Writer Log Employee
         cutE (Employee n a s) =
-          do 
+          do
              let s' = s/2
-             let log = [ LogEntry { 
+             let log = [ LogEntry {
                            name = n,
                            oldSalary = s,
                            newSalary = s'
