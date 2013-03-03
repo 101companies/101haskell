@@ -1,4 +1,4 @@
-module Company where
+module Company.Data where
 
 type Company = Name -- Name of company
 type Department = (

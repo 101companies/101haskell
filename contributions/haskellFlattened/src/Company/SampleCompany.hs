@@ -1,6 +1,6 @@
-module SampleCompany where
+module Company.SampleCompany where
 
-import Company
+import Company.Data
 
 sample :: ([Company], [Department], [Employee])
 sample = (companies, departments, employees)
@@ -15,7 +15,7 @@ departments = [
 	  ("Dev1", Just "Development", "meganalysis"),
 	  ("Dev1.1", Just "Dev1", "meganalysis")
 	]
-	
+
 employees :: [Employee]
 employees = [
 	  ("Craig", "Research", "meganalysis", "Redmond", 123456, True),

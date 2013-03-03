@@ -1,13 +1,13 @@
 -- See http://userpages.uni-koblenz.de/~laemmel/MapReduce/
 
-module MapReduce where
+module Company.MapReduce where
 
 import Data.Map (Map, empty, insertWith, mapWithKey, toList)
 
 -- The simple map-reduce abstraction from Google's paper
 
 mapReduce  ::  Ord k2
-           =>  (k1 -> v1 -> [(k2,v2)])  -- "map" 
+           =>  (k1 -> v1 -> [(k2,v2)])  -- "map"
            ->  (k2 -> [v2] -> v2)      	-- "reduce"
            ->  Map k1 v1 ->  Map k2 v2  -- I/O
 
@@ -21,7 +21,7 @@ mapReduce m r
 
 mapPerKey :: Ord k2
           => (k1 -> v1 -> [(k2,v2)])
-          -> Map k1 v1 
+          -> Map k1 v1
           -> [(k2,v2)]
 
 mapPerKey f = concat . map (uncurry f) . toList

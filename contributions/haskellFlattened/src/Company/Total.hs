@@ -1,8 +1,8 @@
-module Total where
+module Company.Total where
 
-import Company
+import Company.Data
 import Data.Map (Map, empty, insertWith, fromListWith)
-import MapReduce
+import Company.MapReduce
 
 -- Total all salaries (perhaps even of several companies)
 total :: [Employee] -> Float
@@ -13,7 +13,7 @@ totalPerDepartment :: [Employee] -> Map (Name, Name) Float
 totalPerDepartment = foldr insert empty
  where
   insert (_e, d, c, _a, s, _m)
-   = insertWith (+) (c, d) s 
+   = insertWith (+) (c, d) s
 
 -- As before, but with a map step factored out
 totalPerDepartment' :: [Employee] -> Map (Name, Name) Float
