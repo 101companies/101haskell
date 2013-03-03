@@ -5,35 +5,46 @@ import Company.Align
 import Company.Total
 import Company.Cut
 import Company.Depth
+import Test.HUnit
+import System.Exit
 
-main
- = do
+sampleCompany = Company
+  "Acme Corporation"
+  [ Department "Research"
+      (Employee "Craig" "Redmond" 123456)
+      []
+      [ Employee "Erik" "Utrecht" 12345,
+        Employee "Ralf" "Koblenz" 1234
+      ],
+    Department "Development"
+      (Employee "Ray" "Redmond" 234567)
+      [ Department "Dev1"
+          (Employee "Klaus" "Boston" 23456)
+          [ Department "Dev1.1"
+              (Employee "Karl" "Riga" 2345)
+              []
+              [ Employee "Joe" "Wifi City" 2344 ]
+          ]
+          []
+      ]
+      []
+  ]
 
-      -- De-serialize sample company via read
-      txt <- getContents
-      let company = read txt
+totalTest = 399747.0 ~=? total sampleCompany
 
-      -- Test that salaries align with hierarchy
-      if not (align company)
-        then error "constraint violated"
-        else return ()
+cutTest = 199873.5 ~=? total (cut sampleCompany)
 
-      -- Test that show followed by read returns the same company
-      print $ company == read (show company)
+serializationTest = sampleCompany ~=? read (show sampleCompany)
 
-      -- Total all salaries
-      print $ total company
+tests =
+  TestList [
+    TestLabel "total" totalTest,
+    TestLabel "cut" cutTest,
+    TestLabel "serialization" serializationTest
+  ]
 
-      -- Cut all salaries
-      let company' = cut company
-
-      -- Test that salaries align with hierarchy
-      if not (align company')
-        then error "constraint violated"
-        else return ()
-
-      -- Total after cut
-      print $ total company'
-
-      -- Compute depth of department nesting
-      print $ depth company
+main = do
+ counts <- runTestTT tests
+ if (errors counts > 0 || failures counts > 0)
+   then exitFailure
+   else exitSuccess
