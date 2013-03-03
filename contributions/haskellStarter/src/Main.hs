@@ -7,17 +7,17 @@ import Test.HUnit
 import System.Exit
 
 sampleCompany =
- ( "Acme Corporation",
-   [ 
-     ("Craig", "Redmond", 123456),
-     ("Erik", "Utrecht", 12345),
-     ("Ralf", "Koblenz", 1234),
-     ("Ray", "Redmond", 234567),
-     ("Klaus", "Boston", 23456),
-     ("Karl", "Riga", 2345),
-     ("Joe", "Wifi City", 2344)
-   ] 
- )
+  ( "Acme Corporation",
+    [ 
+      ("Craig", "Redmond", 123456),
+      ("Erik", "Utrecht", 12345),
+      ("Ralf", "Koblenz", 1234),
+      ("Ray", "Redmond", 234567),
+      ("Klaus", "Boston", 23456),
+      ("Karl", "Riga", 2345),
+      ("Joe", "Wifi City", 2344)
+    ] 
+  )
 
 totalTest = 399747.0 ~=? total sampleCompany
 
