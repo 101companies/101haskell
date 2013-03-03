@@ -1,4 +1,4 @@
-module Company where
+module Company.Data where
 
 data Company = Company Name [Department]
  deriving (Eq, Read, Show)

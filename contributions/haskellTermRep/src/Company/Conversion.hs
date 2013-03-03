@@ -1,7 +1,7 @@
-module Conversion where
+module Company.Conversion where
 
-import Company
-import TermRep
+import Company.Data
+import Data.TermRep
 
 instance Term Company
   where

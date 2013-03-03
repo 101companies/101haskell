@@ -32,7 +32,7 @@ sampleCompany =
 -- The log part after a cut
 result = snd (cut sampleCompany)
 
--- Compare log entries with a baseline
+-- Compare log entries with baseline
 logTest = entries ~=? result
   where
     entries = [
@@ -45,15 +45,15 @@ logTest = entries ~=? result
         LogEntry {name = "Joe", oldSalary = 2344.0, newSalary = 1172.0}
       ]
 
--- Compare deltas from log entries with a baseline
+-- Compare deltas from log entries with baseline
 deltasTest = deltas ~=? log2deltas result
   where
     deltas = [-117283.5,-61728.0,-11728.0,-6172.5,-1172.5,-1172.0,-617.0]
 
--- Compare mean of deltas with a baseline
+-- Compare mean of deltas with baseline
 meanTest = -28553.357 ~=? log2mean result
 
--- Compare median of deltas with a baseline
+-- Compare median of deltas with baseline
 medianTest = -6172.5 ~=? log2median result
 
 tests =

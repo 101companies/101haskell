@@ -1,7 +1,7 @@
-module Cut where
+module Company.Cut where
 
-import Company
-import TermRep
+import Company.Data
+import Data.TermRep
 
 cut :: TermRep -> TermRep
 cut (FloatRep f) = FloatRep (f/2)

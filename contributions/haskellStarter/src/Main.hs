@@ -19,10 +19,13 @@ sampleCompany =
     ] 
   )
 
+-- Compare salary total with baseline
 totalTest = 399747.0 ~=? total sampleCompany
 
+-- Compare total after cut with baseline
 cutTest = 199873.5 ~=? total (cut sampleCompany)
 
+-- Test for round-tripping of de-/serialization
 serializationTest = sampleCompany ~=? read (show sampleCompany)
 
 tests =

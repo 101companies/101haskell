@@ -1,7 +1,7 @@
-module Total where
+module Company.Total where
 
-import Company
-import TermRep
+import Company.Data
+import Data.TermRep
 
 total :: TermRep -> Float
 total (FloatRep f) = f

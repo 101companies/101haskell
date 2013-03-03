@@ -1,7 +1,8 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE OverlappingInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 
-module TermRep where
+module Data.TermRep where
 
 data TermRep
   = IntRep Int
