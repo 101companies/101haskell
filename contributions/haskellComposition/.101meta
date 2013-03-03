@@ -1,18 +1,14 @@
 [
  {
   "filename" : "contributions/haskell/Total.hs",
-  "fragment" : {
-   "function" : "total"
-  },
+  "fragment" : "function/total",
   "metadata": {
 	"phrase": ["Total", "Company"]
   }
  },
  {
   "filename" : "contributions/haskell/Cut.hs",
-  "fragment" : {
-   "function" : "cut"
-  },
+  "fragment" : "function/cut",
   "metadata": {
 	"phrase": ["Cut", "Company"]
   }
