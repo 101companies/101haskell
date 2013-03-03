@@ -1,7 +1,7 @@
-module Cut where
+module Company.Cut where
 
-import Company
-import Log
+import Company.Data
+import Company.Log
 
 cut :: Company -> (Company, Log)
 cut (Company n ds) = (Company n ds', log)
