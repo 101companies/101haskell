@@ -30,17 +30,31 @@ sampleCompany = Company
       []
   ]
 
+failCorp = Company
+  "Fail Industries"
+  [ Department "Failure"
+      (Employee "Advice Dog" "Memebase" 100)
+      []
+      [Employee "Philosoraptor" "/b/" 1000]
+  ]
+
 totalTest = 399747.0 ~=? total sampleCompany
 
 cutTest = 199873.5 ~=? total (cut sampleCompany)
 
 serializationTest = sampleCompany ~=? read (show sampleCompany)
 
+alignmentSuccessTest =  True ~=? align sampleCompany
+
+alignmentFailureTest = False ~=? align failCorp
+
 tests =
   TestList [
     TestLabel "total" totalTest,
     TestLabel "cut" cutTest,
-    TestLabel "serialization" serializationTest
+    TestLabel "serialization" serializationTest,
+    TestLabel "alignmentSuccess" alignmentSuccessTest,
+    TestLabel "alignmentFailure" alignmentFailureTest
   ]
 
 main = do
