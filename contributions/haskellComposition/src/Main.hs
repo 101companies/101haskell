@@ -30,6 +30,7 @@ sampleCompany = Company
       []
   ]
 
+-- A company that violates the alignment constraint
 failCorp = Company
   "Fail Industries"
   [ Department "Failure"
@@ -38,14 +39,19 @@ failCorp = Company
       [Employee "Philosoraptor" "/b/" 1000]
   ]
 
+-- Compare salary total with baseline
 totalTest = 399747.0 ~=? total sampleCompany
 
+-- Compare total after cut with baseline
 cutTest = 199873.5 ~=? total (cut sampleCompany)
 
+-- Test for round-tripping of de-/serialization
 serializationTest = sampleCompany ~=? read (show sampleCompany)
 
+-- Check alignment constraint for salaries
 alignmentSuccessTest =  True ~=? align sampleCompany
 
+-- Negative test case for alignment constraint
 alignmentFailureTest = False ~=? align failCorp
 
 tests =
