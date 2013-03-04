@@ -13,11 +13,19 @@ maintainer:          rlaemmel@gmail.com
 -- copyright:
 -- category:
 build-type:          Simple
-cabal-version:       >=1.6
+cabal-version:       >=1.9.2
 
-executable syb
-  main-is:             Main.hs
-  -- other-modules:
+library
+  exposed-modules:
+    Company.Cut
+    Company.Total
+    Company.Data
   build-depends:       base >= 4.4 && < 5.0,
                        syb >= 0.3
   hs-source-dirs:      src
+
+test-suite basic-tests
+    main-is:           Main.hs
+    build-depends:     base, HUnit, syb
+    hs-source-dirs:    src
+    type:              exitcode-stdio-1.0
