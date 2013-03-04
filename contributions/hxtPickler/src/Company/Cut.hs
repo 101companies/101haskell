@@ -1,17 +1,17 @@
-module Cut where
+module Company.Cut where
 
-import Company
+import Company.Data
 
 cut :: Company -> Company
 cut (Company n depts) = Company n $ map cutDept depts
 
 cutDept :: Department -> Department
-cutDept (Department n m sus) = Department n 
-                                    (cutEmployee m)  
+cutDept (Department n m sus) = Department n
+                                    (cutEmployee m)
                                     (map cutSubunit sus)
 
 cutEmployee :: Employee -> Employee
-cutEmployee (Employee n a s) = Employee n a (s/2)  
+cutEmployee (Employee n a s) = Employee n a (s/2)
 
 cutSubunit :: SubUnit -> SubUnit
 cutSubunit (EUnit e) = EUnit (cutEmployee e)

@@ -1,22 +1,22 @@
-module Company where
+module Company.Data where
 
 data Company = Company
         { cname      :: Name
         , depts     :: [Department]
         }
     deriving (Eq,Show)
-            
-data Department = Department 
+
+data Department = Department
         { dname      :: Name
         , manager   :: Manager
         , subunits  :: [SubUnit]
         }
     deriving (Eq,Show)
-     
+
 type Manager = Employee
 
-data Employee = Employee 
-        { ename      :: Name 
+data Employee = Employee
+        { ename      :: Name
         , address   :: Address
         , salary    :: Salary
         }
@@ -25,12 +25,11 @@ data Employee = Employee
 type Name = String
 type Address = String
 type Salary = Float
-    
-data SubUnit = 
-          EUnit 
+
+data SubUnit =
+          EUnit
             { employee   :: Employee}
           |
           DUnit
-            { department :: Department}       
+            { department :: Department}
       deriving (Eq,Show)
-

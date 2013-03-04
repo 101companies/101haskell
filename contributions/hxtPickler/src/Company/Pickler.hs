@@ -1,25 +1,25 @@
-module Pickler where
+module Company.Pickler where
 
 import Text.XML.HXT.Arrow.Pickle.Xml
 
-import Company
+import Company.Data
 
 -- instance declarations per company data type
 instance XmlPickler Company where
     xpickle = xpCompany
-    
+
 instance XmlPickler Department where
     xpickle = xpDepartment
-  
+
 instance XmlPickler Employee where
     xpickle = xpEmployee
-  
+
 instance XmlPickler SubUnit where
     xpickle = xpSubUnit
 
--- pickle company    
+-- pickle company
 xpCompany :: PU Company
-xpCompany 
+xpCompany
       = xpElem "company" $
         xpWrap ( uncurry Company
                , \c -> ( cname c
@@ -29,23 +29,23 @@ xpCompany
         xpPair  (xpAttr "name" xpText)
                 (xpList xpickle)
 
--- pickle department                
+-- pickle department
 xpDepartment :: PU Department
-xpDepartment 
+xpDepartment
       = xpElem "department" $
         xpWrap ( \(n,m,ss) -> Department n m ss
                , \d -> ( dname d
                        , manager d
                        , subunits d
-                       )  
+                       )
                ) $
         xpTriple (xpAttr "name" xpText)
                 (xpElem "manager" xpEmployee)
                 (xpList xpickle)
-                
+
 -- pickle employee
 xpEmployee :: PU Employee
-xpEmployee 
+xpEmployee
       = xpWrap ( \(n,a,s) -> Employee n a s
                , \e -> ( ename e
                        , address e
@@ -55,10 +55,10 @@ xpEmployee
         xpTriple (xpElem "name" xpText)
                  (xpElem "address" xpText)
                  (xpElem "salary" xpPrim)
-       
+
 -- pickle subunit
 xpSubUnit :: PU SubUnit
-xpSubUnit 
+xpSubUnit
       = xpAlt tag ps
           where
             tag (EUnit _ ) = 0
@@ -75,8 +75,3 @@ xpSubUnit
                          , department
                          ) $
                   xpickle
-                  
-              
-
-
-                   
