@@ -32,7 +32,7 @@ test-suite basic-tests
   main-is:             Main.hs
   build-depends:       base >= 4.4 && < 5.0,
                        mtl >= 2.1,
-                       directory >= 1.2,
+                       directory >= 1.1,
                        syb >= 0.3,
                        HUnit
   hs-source-dirs:      src, StrategyLib
