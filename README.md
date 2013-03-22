@@ -25,6 +25,11 @@ The relevant commands are shown here for the "haskellStarter" contribution.
     $ cabal build
     $ cabal test
 
+These steps are also scriped once and for all. Thus:
+
+    $ cd contributions/haskellStarter
+    $ ../../tools/make-101haskell
+
 Alternatively, the tests can also be invoked more interactively:
 
     $ cd src
