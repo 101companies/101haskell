@@ -1,9 +1,9 @@
-This is a beginner's Haskell-based 101companies System.
+This is a beginner's Haskell-based contribution to the 101companies Project.
 
-If you have ghci installed, then you can test the code as follows:
+If you have ghci installed, then you can easily test the code as follows:
 
      $ pwd
-     /home/billg/101haskell/contributions/haskellStarter
+     /home/billg/101haskell/contributions/haskellStarter/src
      $ ghci Main.hs 
      GHCi, version 7.4.2: http://www.haskell.org/ghc/  :? for help
      Loading package ghc-prim ... linking ... done.
@@ -17,6 +17,8 @@ If you have ghci installed, then you can test the code as follows:
      *Main> 
      Leaving GHCi.
      $ 
+
+The main function (see the code) totals the salaries of all employees in a sample company (also to be found in the file) and then, it cuts all salaries in half to show again the total after the cut.
 
 Please find additional information here:
 * http://101companies.org/
