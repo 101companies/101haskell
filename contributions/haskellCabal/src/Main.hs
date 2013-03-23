@@ -6,6 +6,7 @@ import Company.Cut
 import Test.HUnit
 import System.Exit
 
+-- Test data
 sampleCompany =
   ( "Acme Corporation",
     [ 

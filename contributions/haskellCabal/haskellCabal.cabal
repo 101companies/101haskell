@@ -1,10 +1,7 @@
-name:                haskellStarter
+name:                haskellCabal
 version:             0.1.0.0
-synopsis:            Basic Functional Programming in Haskell
+synopsis:            Packaging, unit testing, and modularization in Haskell
 homepage:            101companies.org
-license-file:        LICENSE
-author:              Ralf Lämmel
-maintainer:          rlaemmel@gmail.com
 build-type:          Simple
 cabal-version:       >=1.9.2
 
