@@ -25,6 +25,10 @@ The relevant commands are shown here for the "haskellStarter" contribution.
     $ cabal build
     $ cabal test
 
+Left-overs from the attempted build are cleaned up like this:
+
+    $ cabal clean
+
 These steps are also scriped once and for all. Thus:
 
     $ cd contributions/haskellStarter
