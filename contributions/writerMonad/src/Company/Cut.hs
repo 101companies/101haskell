@@ -4,14 +4,13 @@ import Company.Data
 import Company.Log
 import Control.Monad.Writer
 
-
--- A variant NOT using do notation
-
+-- Cut all salaries in a company and log all salaries changes
 cut :: Company -> (Company, Log)
 cut (Company n ds)
   = let (ds',log) = runWriter (mapM cutD ds) in
       (Company n ds', log)
   where
+    -- Cut all salaries in a department
     cutD :: Department -> Writer Log Department
     cutD (Department n m ds es) =
          cutE m >>= \m' ->
@@ -19,6 +18,7 @@ cut (Company n ds)
          mapM cutE es >>= \es' ->
          return (Department n m' ds' es')
       where
+        -- Cut the salary of an employee in half
         cutE :: Employee -> Writer Log Employee
         cutE (Employee n a s) =
              let
@@ -32,9 +32,7 @@ cut (Company n ds)
                 tell log >>= \() ->
                 return (Employee n a s')
 
-
 -- A variant using do notation
-
 cut' :: Company -> (Company, Log)
 cut' (Company n ds)
   = let (ds',log) = runWriter (mapM cutD ds) in

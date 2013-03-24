@@ -1,41 +1,19 @@
 module Main where
 
 import Company.Data
+import Company.Sample
 import Company.Cut
 import Company.Log
 import Test.HUnit
 import System.Exit
 
-sampleCompany =
-  Company
-    "Acme Corporation"
-    [ Department "Research" 
-        (Employee "Craig" "Redmond" 123456)
-        []
-        [ Employee "Erik" "Utrecht" 12345,
-          Employee "Ralf" "Koblenz" 1234
-        ],
-      Department "Development"
-        (Employee "Ray" "Redmond" 234567)
-        [ Department "Dev1"
-            (Employee "Klaus" "Boston" 23456)
-            [ Department "Dev1.1"
-                (Employee "Karl" "Riga" 2345)
-                []
-                [ Employee "Joe" "Wifi City" 2344 ]
-            ]
-            []
-        ]
-        []
-    ]
-
 -- The log part after a cut
-result = snd (cut sampleCompany)
+sampleCompanyLog = snd (cut sampleCompany)
 
--- Compare log entries with baseline
-logTest = entries ~=? result
+-- Compare log with baseline
+cutLogTest = baseline ~=? sampleCompanyLog
   where
-    entries = [
+    baseline = [
         LogEntry {name = "Craig", oldSalary = 123456.0, newSalary = 61728.0},
         LogEntry {name = "Erik", oldSalary = 12345.0, newSalary = 6172.5},
         LogEntry {name = "Ralf", oldSalary = 1234.0, newSalary = 617.0},
@@ -46,19 +24,19 @@ logTest = entries ~=? result
       ]
 
 -- Compare deltas from log entries with baseline
-deltasTest = deltas ~=? log2deltas result
+deltasTest = deltas ~=? log2deltas sampleCompanyLog
   where
     deltas = [-117283.5,-61728.0,-11728.0,-6172.5,-1172.5,-1172.0,-617.0]
 
 -- Compare mean of deltas with baseline
-meanTest = -28553.357 ~=? log2mean result
+meanTest = -28553.357 ~=? log2mean sampleCompanyLog
 
 -- Compare median of deltas with baseline
-medianTest = -6172.5 ~=? log2median result
+medianTest = -6172.5 ~=? log2median sampleCompanyLog
 
 tests =
   TestList [
-    TestLabel "log" logTest,
+    TestLabel "cutLog" cutLogTest,
     TestLabel "deltas" deltasTest,
     TestLabel "mean" meanTest,
     TestLabel "median" medianTest
