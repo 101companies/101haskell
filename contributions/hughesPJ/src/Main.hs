@@ -1,15 +1,24 @@
 module Main where
 
 import Company.Data
+import Company.Sample
 import Company.Unparser
+import Test.HUnit
+import System.Exit
 
-main
- = do
+-- Test for unparsing to agree with the baseline
+unparsingTest baseline = baseline ~=? show (unparse sampleCompany)
 
-      -- De-serialize sample company via read
-      txt <- readFile "../haskellComposition/sampleCompany.txt"
-      let company = read txt
+tests baseline =
+  TestList [
+    TestLabel "unparsing" $ unparsingTest baseline
+  ]
 
-      -- Unparse company
-      let doc = unparse company
-      print doc
+main = do
+  -- Read baseline from file
+  baseline <- readFile "sampleCompany.txt"
+  -- Run tests
+  counts <- runTestTT $ tests baseline
+  if (errors counts > 0 || failures counts > 0)
+    then exitFailure
+    else exitSuccess

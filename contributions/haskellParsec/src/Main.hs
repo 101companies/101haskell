@@ -1,26 +1,27 @@
 module Main where
 
 import Company.Data
-import Company.Total
-import Company.Cut
+import Company.Sample
 import Company.Parser
+import Data.Either
+import Test.HUnit
+import System.Exit
 
-main
- = do
-      -- Parse sample company
-      txt <- readFile "sampleCompany.txt"
-      let either = parseCompany txt
+-- Test for parsing to agree with the baseline
+parsingTest input = Just sampleCompany ~=? eitherToMaybe (parseCompany input)
+  where
+    eitherToMaybe = either (const Nothing) Just
 
-      -- Handle parse error
-      case either of
-       (Left e) -> print e
-       (Right company) -> do
+tests input =
+  TestList [
+    TestLabel "parsing" $ parsingTest input
+  ]
 
-        -- Total all salaries
-        print $ total company
-
-        -- Cut all salaries
-        let company' = cut company
-
-        -- Total after cut
-        print $ total company'
+main = do
+  -- Read input from file
+  input <- readFile "sampleCompany.txt"
+  -- Run tests
+  counts <- runTestTT $ tests input
+  if (errors counts > 0 || failures counts > 0)
+    then exitFailure
+    else exitSuccess
