@@ -8,6 +8,7 @@ cabal-version:       >=1.9.2
 library
   exposed-modules:
     Company.Data
+    Company.Sample
     Company.Cut
     Company.Total
   build-depends:       base >=4.4 && < 5.0

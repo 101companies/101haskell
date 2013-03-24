@@ -2,6 +2,8 @@ module Company.Sample where
 
 import Company.Data
 
+-- Test data
+sampleCompany :: Company
 sampleCompany = Company
   "Acme Corporation"
   [ Department "Research"

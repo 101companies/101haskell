@@ -12,4 +12,4 @@ depth (Company _ ds) = max' (map depth' ds)
     max' = maybe 0 id . getMax . mconcat 
     -- Helper at the department level
     depth' :: Department -> Max Int
-    depth' (Department _ _ ds _) = Max (Just (1 + max' (map depth' ds)))
+    depth' (Department _ _ ds _) = setMax (1 + max' (map depth' ds))

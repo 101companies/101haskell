@@ -1,9 +1,10 @@
 module Company.Depth where
 
 import Company.Data
-import Company.Deriving
+import Company.Generics
 import Data.Generics
 
+-- Compute the nesting depth of a company
 depth :: Company -> Int
 depth = depth'
   where

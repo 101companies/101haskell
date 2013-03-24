@@ -1,24 +1,11 @@
 module Main where
 
 import Company.Data
+import Company.Sample
 import Company.Total
 import Company.Cut
 import Test.HUnit
 import System.Exit
-
--- Test data
-sampleCompany =
-  ( "Acme Corporation",
-    [ 
-      ("Craig", "Redmond", 123456),
-      ("Erik", "Utrecht", 12345),
-      ("Ralf", "Koblenz", 1234),
-      ("Ray", "Redmond", 234567),
-      ("Klaus", "Boston", 23456),
-      ("Karl", "Riga", 2345),
-      ("Joe", "Wifi City", 2344)
-    ] 
-  )
 
 -- Compare salary total with baseline
 totalTest = 399747.0 ~=? total sampleCompany

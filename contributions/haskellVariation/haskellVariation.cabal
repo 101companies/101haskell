@@ -1,6 +1,6 @@
-name:                haskellList
+name:                haskellVariation
 version:             0.1.0.0
-synopsis:            List processing with map and friends in Haskell
+synopsis:            Data variation in Haskell with algebraic data types
 homepage:            101companies.org
 build-type:          Simple
 cabal-version:       >=1.9.2
@@ -9,8 +9,10 @@ library
   exposed-modules:
     Company.Data
     Company.Sample
-    Company.Cut
     Company.Total
+    Company.Cut
+    Company.Depth
+    Company.Align
   build-depends:       base >=4.4 && < 5.0
   hs-source-dirs:      src
 

@@ -1,48 +1,49 @@
 module Main where
 
 import Company.Data
+import Company.Sample
 import Company.Total
 import Company.Cut
 import Company.Depth
+import Company.Align
 import Test.HUnit
 import System.Exit
 
-sampleCompany = Company
-  "Acme Corporation"
-  [ Department "Research"
-      (Employee "Craig" "Redmond" 123456)
-      []
-      [ Employee "Erik" "Utrecht" 12345,
-        Employee "Ralf" "Koblenz" 1234
-      ],
-    Department "Development"
-      (Employee "Ray" "Redmond" 234567)
-      [ Department "Dev1"
-          (Employee "Klaus" "Boston" 23456)
-          [ Department "Dev1.1"
-              (Employee "Karl" "Riga" 2345)
-              []
-              [ Employee "Joe" "Wifi City" 2344 ]
-          ]
-          []
-      ]
-      []
-  ]
-
-totalTest = 399747.0 ~=? total sampleCompany
-
-cutTest = 199873.5 ~=? total (cut sampleCompany)
-
+-- Test for round-tripping of de-/serialization
 serializationTest = sampleCompany ~=? read (show sampleCompany)
 
-depthTest = (depth sampleCompany) ~=? 3
+-- Compare salary total with baseline
+totalTest = 399747.0 ~=? total sampleCompany
+
+-- Compare total after cut with baseline
+cutTest = 199873.5 ~=? total (cut sampleCompany)
+
+-- Compare depth of sample company with baseline
+depthTest = 3 ~=? depth sampleCompany
+
+-- Check alignment constraint for salaries
+alignmentSuccessTest =  True ~=? align sampleCompany
+
+-- Negative test case for alignment constraint
+alignmentFailureTest = False ~=? align unalignedSample
+
+-- A company that violates the alignment constraint
+unalignedSample = Company
+  "Fail Industries"
+  [ Department "Failure"
+      (Employee "Ubermanager" "Top Floor" 100)
+      []
+      [Employee "Joe Programmer" "Basement" 1000]
+  ]
 
 tests =
   TestList [
+    TestLabel "serialization" serializationTest,
     TestLabel "total" totalTest,
     TestLabel "cut" cutTest,
-    TestLabel "serialization" serializationTest,
-    TestLabel "depth" depthTest
+    TestLabel "depth" depthTest,
+    TestLabel "alignmentSuccess" alignmentSuccessTest,
+    TestLabel "alignmentFailure" alignmentFailureTest
   ]
 
 main = do

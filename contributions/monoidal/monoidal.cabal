@@ -1,19 +1,16 @@
 name:                monoidal
 version:             0.1.0.0
-synopsis:            Model queries in Language:Haskell with the help of monoids
+synopsis:            Model queries in Haskell with the help of monoids 
 homepage:            101companies.org
-license-file:        LICENSE
-author:              Ralf Lämmel
-maintainer:          rlaemmel@gmail.com
 build-type:          Simple
 cabal-version:       >=1.9.2
 
 library
   exposed-modules:
-    Data.Max
     Company.Data
-    Company.Cut
+    Company.Sample
     Company.Total
+    Company.Cut
     Company.Depth
     Company.Align
   build-depends:       base >=4.4 && < 5.0

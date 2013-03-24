@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -e
 cabal configure --enable-tests
 cabal build
 cabal test
