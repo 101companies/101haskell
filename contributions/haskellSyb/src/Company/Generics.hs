@@ -1,5 +1,5 @@
--- Derive SYB-related instances modularly.
--- Instead, the data type declarations could also be revisited.
+-- Derive SYB support instances modularly.
+-- Instead, the data type declarations could also be revised.
 
 {-# LANGUAGE DeriveDataTypeable, StandaloneDeriving #-}
 
