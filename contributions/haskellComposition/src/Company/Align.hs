@@ -15,3 +15,12 @@ align (Company _ ds) = and (map (align' Nothing) ds)
     -- Extract the salary of an employee
     getSalary :: Employee -> Float
     getSalary (Employee _ _ s) = s
+
+-- A company that violates the alignment constraint
+unalignedSample = Company
+  "Fail Industries"
+  [ Department "Failure"
+      (Employee "Ubermanager" "Top Floor" 100)
+      []
+      [Employee "Joe Programmer" "Basement" 1000]
+  ]

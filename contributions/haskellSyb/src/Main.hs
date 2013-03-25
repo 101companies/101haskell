@@ -27,15 +27,6 @@ alignmentSuccessTest =  True ~=? align sampleCompany
 -- Negative test case for alignment constraint
 alignmentFailureTest = False ~=? align unalignedSample
 
--- A company that violates the alignment constraint
-unalignedSample = Company
-  "Fail Industries"
-  [ Department "Failure"
-      (Employee "Ubermanager" "Top Floor" 100)
-      []
-      [Employee "Joe Programmer" "Basement" 1000]
-  ]
-
 tests =
   TestList [
     TestLabel "serialization" serializationTest,
