@@ -10,7 +10,6 @@ library
     Company.Data
     Company.Sample
     Company.Total
-    Company.Cut
     Company.Depth
     Company.Align
   build-depends:       base >=4.4 && < 5.0
