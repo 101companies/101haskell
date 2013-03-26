@@ -1,23 +1,23 @@
-module Company.Align where
+module Company.Ranking where
 
 import Company.Data
 
--- Check that salaries align with company hierarchy
-align :: Company -> Bool
-align (Company _ ds) = and (map (align' Nothing) ds)
+-- Check that salaries follow ranks in company hierarchy
+ranking :: Company -> Bool
+ranking (Company _ ds) = and (map (ranking' Nothing) ds)
   where
     -- Helper at the department level
-    align' :: Maybe Float -> Department -> Bool
-    align' v (Department _ m ds es)
+    ranking' :: Maybe Float -> Department -> Bool
+    ranking' v (Department _ m ds es)
       =  maybe True (>getSalary m) v
-      && and (map (align' (Just (getSalary m))) ds)
+      && and (map (ranking' (Just (getSalary m))) ds)
       && and (map ((<getSalary m) . getSalary) es)
     -- Extract the salary of an employee
     getSalary :: Employee -> Float
     getSalary (Employee _ _ s) = s
 
--- A company that violates the alignment constraint
-unalignedSample = Company
+-- A company that violates the ranking constraint
+rankingFailSample = Company
   "Fail Industries"
   [ Department "Failure"
       (Employee "Ubermanager" "Top Floor" 100)

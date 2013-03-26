@@ -5,7 +5,7 @@ import Company.Sample
 import Company.Total
 import Company.Cut
 import Company.Depth
-import Company.Align
+import Company.Ranking
 import Test.HUnit
 import System.Exit
 
@@ -21,11 +21,11 @@ cutTest = 199873.5 ~=? total (cut sampleCompany)
 -- Compare depth of sample company with baseline
 depthTest = 3 ~=? depth sampleCompany
 
--- Check alignment constraint for salaries
-alignmentSuccessTest =  True ~=? align sampleCompany
+-- Check ranking constraint for salaries
+rankingOkTest =  True ~=? ranking sampleCompany
 
--- Negative test case for alignment constraint
-alignmentFailureTest = False ~=? align unalignedSample
+-- Negative test case for ranking constraint
+rankingFailTest = False ~=? ranking rankingFailSample
 
 tests =
   TestList [
@@ -33,8 +33,8 @@ tests =
     TestLabel "total" totalTest,
     TestLabel "cut" cutTest,
     TestLabel "depth" depthTest,
-    TestLabel "alignmentSuccess" alignmentSuccessTest,
-    TestLabel "alignmentFailure" alignmentFailureTest
+    TestLabel "rankingOk" rankingOkTest,
+    TestLabel "rankingFail" rankingFailTest
   ]
 
 main = do

@@ -1,17 +1,17 @@
-module Company.Align where
+module Company.Ranking where
 
 import Company.Data
 import Data.Monoid
 import Data.Max
 
--- Check that salaries align with company hierarchy
-align :: Company -> Bool
-align (Company _ ds) = and (map align' ds)
+-- Check that salaries follow ranks in company hierarchy
+ranking :: Company -> Bool
+ranking (Company _ ds) = and (map ranking' ds)
   where
     -- Helper at the department level
-    align' :: Department -> Bool
-    align' (Department _ m ds es)
-        =  and (map align' ds)
+    ranking' :: Department -> Bool
+    ranking' (Department _ m ds es)
+        =  and (map ranking' ds)
         && maybe True (<getSalary m) (getMax subunits)
       where
         -- Maximum of salaries for immediate employees
@@ -30,8 +30,8 @@ align (Company _ ds) = and (map align' ds)
     getSalary :: Employee -> Float
     getSalary (Employee _ _ s) = s
 
--- A company that violates the alignment constraint
-unalignedSample = Company
+-- A company that violates the ranking constraint
+rankingFailSample = Company
   "Fail Industries"
   [ Department "Failure"
       (Employee "Ubermanager" "Top Floor" 100)

@@ -4,7 +4,7 @@ import Company.Data
 import Company.Sample
 import Company.Total
 import Company.Depth
-import Company.Align
+import Company.Ranking
 import Test.HUnit
 import System.Exit
 
@@ -17,19 +17,19 @@ totalTest = 399747.0 ~=? total sampleCompany
 -- Compare depth of sample company with baseline
 depthTest = 3 ~=? depth sampleCompany
 
--- Check alignment constraint for salaries
-alignmentSuccessTest =  True ~=? align sampleCompany
+-- Check ranking constraint for salaries
+rankingOkTest =  True ~=? ranking sampleCompany
 
--- Negative test case for alignment constraint
-alignmentFailureTest = False ~=? align unalignedSample
+-- Negative test case for ranking constraint
+rankingFailTest = False ~=? ranking rankingFailSample
 
 tests =
   TestList [
     TestLabel "serialization" serializationTest,
     TestLabel "total" totalTest,
     TestLabel "depth" depthTest,
-    TestLabel "alignmentSuccess" alignmentSuccessTest,
-    TestLabel "alignmentFailure" alignmentFailureTest
+    TestLabel "rankingOk" rankingOkTest,
+    TestLabel "rankingFail" rankingFailTest
   ]
 
 main = do

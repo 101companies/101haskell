@@ -13,7 +13,7 @@ library
     Company.Total
     Company.Cut
     Company.Depth
-    Company.Align
+    Company.Ranking
   build-depends:       base >= 4.4 && < 5.0,
                        syb >= 0.3
   hs-source-dirs:      src

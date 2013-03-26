@@ -1,18 +1,18 @@
-module Company.Align where
+module Company.Ranking where
 
 import Company.Data
 import Company.Generics
 import Data.Generics
 
--- Check that salaries align with company hierarchy
-align :: Company -> Bool
-align (Company _ ds) =
+-- Check that salaries follow ranks in company hierarchy
+ranking :: Company -> Bool
+ranking (Company _ ds) =
   -- Exercise: find the time complexity bug!
-  everything (&&) (extQ (const True) align') ds
+  everything (&&) (extQ (const True) ranking') ds
     where
       -- Helper at the department level
-      align' :: Department -> Bool
-      align' (Department _ m ds es)
+      ranking' :: Department -> Bool
+      ranking' (Department _ m ds es)
         = and (map (<getSalary m) (allSalaries (ds,es)))
       -- Collect all salaries of subunits
       allSalaries :: ([Department],[Employee]) -> [Float]
@@ -21,8 +21,8 @@ align (Company _ ds) =
       getSalary :: Employee -> Float
       getSalary (Employee _ _ s) = s
 
--- A company that violates the alignment constraint
-unalignedSample = Company
+-- A company that violates the ranking constraint
+rankingFailSample = Company
   "Fail Industries"
   [ Department "Failure"
       (Employee "Ubermanager" "Top Floor" 100)
