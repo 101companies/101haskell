@@ -33,29 +33,28 @@ sampleCompany =
 total :: Company -> Float
 total = sum . salaries
 
--- Median of all salaries in a company
-median :: Company -> Salary
-median = median' . sort . salaries
-
--- Median of a sort list
-median' [] = error "Cannot compute median on empty list."
-median' [x] = x
-median' [x,y] = (x+y)/2
-median' l = median' (init (tail l))
-
 -- Extract all salaries in a company
-
 salaries :: Company -> [Salary]
-salaries (n, es) = salariesEs es
+salaries (n, es) = getSalaries es
 
 -- Extract all salaries of lists of employees
-salariesEs :: [Employee] -> [Salary]
-salariesEs [] = []
-salariesEs (e:es) = salaryE e : salariesEs es
+getSalaries :: [Employee] -> [Salary]
+getSalaries [] = []
+getSalaries (e:es) = getSalary e : getSalaries es
 
 -- Extract the salary from an employee
-salaryE :: Employee -> Salary
-salaryE (_, _, s) = s
+getSalary :: Employee -> Salary
+getSalary (_, _, s) = s
+
+-- Median of all salaries in a company
+median :: Company -> Salary
+median = medianSorted . sort . salaries
+
+-- Median of a sorted list
+medianSorted [] = error "Cannot compute median on empty list."
+medianSorted [x] = x
+medianSorted [x,y] = (x+y)/2
+medianSorted l = medianSorted (init (tail l))
 
 -- Cut all salaries in a company
 cut :: Company -> Company
