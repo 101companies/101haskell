@@ -13,12 +13,13 @@ If you have ghci installed, then you can easily test the code as follows:
      Ok, modules loaded: Main.
      *Main> main
      399747.0
+     12345.0
      199873.5
      *Main> 
      Leaving GHCi.
      $ 
 
-The main function (see the code) totals the salaries of all employees in a sample company (also to be found in the file) and then, it cuts all salaries in half to show again the total after the cut.
+The main function (see the code) totals the salaries of all employees in a sample company (also to be found in the file), computes the median of all salaries, and it cuts all salaries in half to show again the total after the cut.
 
 Please find additional information here:
 * http://101companies.org/
