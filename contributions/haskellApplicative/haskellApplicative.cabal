@@ -1,0 +1,20 @@
+name:                haskellApplicative
+version:             0.1.0.0
+synopsis:            Parsing in Haskell with Parsec and applicative functors
+homepage:            101companies.org
+build-type:          Simple
+cabal-version:       >=1.6
+
+library
+  exposed-modules:
+    Company.Data
+    Company.Sample
+    Company.Parser
+  build-depends:       base >=4.4 && < 5.0, parsec >=3.1
+  hs-source-dirs:      src
+
+test-suite basic-tests
+    main-is:           Main.hs
+    build-depends:     base, HUnit, parsec
+    hs-source-dirs:    src
+    type:              exitcode-stdio-1.0
