@@ -4,13 +4,13 @@ import Company.Data
 
 -- Cut all salaries in a company
 cut :: Company -> Company
-cut (n, es) = (n, cutEs es)
+cut (n, es) = (n, cutEmployees es)
 
 -- Cut salaries for lists of employees
-cutEs :: [Employee] -> [Employee]
-cutEs [] = []
-cutEs (e:es) = cutE e : cutEs es
+cutEmployees :: [Employee] -> [Employee]
+cutEmployees [] = []
+cutEmployees (e:es) = cutEmployee e : cutEmployees es
 
 -- Cut the salary of an employee in half
-cutE :: Employee -> Employee
-cutE (n, a, s) = (n, a, s/2)
+cutEmployee :: Employee -> Employee
+cutEmployee (n, a, s) = (n, a, s/2)

@@ -4,13 +4,17 @@ import Company.Data
 
 -- Total all salaries in a company
 total :: Company -> Float
-total (n, es) = totalEs es
+total = sum . salaries
 
--- Total salaries of lists of employees
-totalEs :: [Employee] -> Float
-totalEs [] = 0
-totalEs (e:es) = totalE e + totalEs es
+-- Extract all salaries in a company
+salaries :: Company -> [Salary]
+salaries (n, es) = getSalaries es
+
+-- Extract all salaries of lists of employees
+getSalaries :: [Employee] -> [Salary]
+getSalaries [] = []
+getSalaries (e:es) = getSalary e : getSalaries es
 
 -- Extract the salary from an employee
-totalE :: Employee -> Float
-totalE (_, _, s) = s
+getSalary :: Employee -> Salary
+getSalary (_, _, s) = s

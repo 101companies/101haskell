@@ -9,8 +9,9 @@ library
   exposed-modules:
     Company.Data
     Company.Sample
-    Company.Cut
     Company.Total
+    Company.Median
+    Company.Cut
   build-depends:       base >=4.4 && < 5.0
   hs-source-dirs:      src
 
