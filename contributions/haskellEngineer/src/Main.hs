@@ -1,4 +1,5 @@
 {-| Tests for the 101companies System -}
+
 module Main where
 
 import Company.Data
