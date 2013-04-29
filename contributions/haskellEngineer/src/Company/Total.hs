@@ -1,12 +1,17 @@
-module Company.Total where
+{-| The operation of totaling all salaries of all employees in a company -}
+
+module Company.Total (
+  total,
+  salaries
+) where
 
 import Company.Data
 
--- Total all salaries in a company
+-- | Total all salaries in a company
 total :: Company -> Float
 total = sum . salaries
 
--- Extract all salaries in a company
+-- | Extract all salaries in a company
 salaries :: Company -> [Salary]
 salaries (n, es) = getSalaries es
 

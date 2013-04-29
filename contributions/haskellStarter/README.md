@@ -21,9 +21,10 @@ If you have ghci installed, then you can easily test the code as follows:
 
 The main function (see the code) totals the salaries of all employees in a sample company (also to be found in the file), computes the median of all salaries, and it cuts all salaries in half to show again the total after the cut.
 
+One can run "make" to check the main's function output against a baseline:
+
+     $ make
+
 Please find additional information here:
-* http://101companies.org/
 * http://101companies.org/wiki/Contribution:haskellStarter
 * https://github.com/101companies/101haskell/
-* https://github.com/101companies/101haskell/blob/master/README.md 
-
