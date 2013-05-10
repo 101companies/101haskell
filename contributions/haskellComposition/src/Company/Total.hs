@@ -1,16 +1,27 @@
-module Company.Total where
+{-| The operation of totaling all salaries of all employees in a company -}
+
+module Company.Total (
+  total,
+  salaries
+) where
 
 import Company.Data
 
--- Total all salaries in a company
+-- | Total all salaries in a company
 total :: Company -> Float
-total (Company n ds) = sum (map totalD ds)
+total = sum . salaries
+
+-- | Extract all salaries in a company
+salaries :: Company -> [Salary]
+salaries (Company n ds) = concat (map salaries' ds)
   where
-    -- Total all salaries in a department
-    totalD :: Department -> Float
-    totalD (Department _ m ds es)
-      = sum (totalE m : map totalD ds ++ map totalE es)
+    -- Extract all salaries in a department
+    salaries' :: Department -> [Salary]
+    salaries' (Department _ m ds es)
+      =    [getSalary m]
+        ++ concat (map salaries' ds)
+        ++ map getSalary es
       where
         -- Extract the salary from an employee
-        totalE :: Employee -> Float
-        totalE (Employee _ _ s) = s
+        getSalary :: Employee -> Salary
+        getSalary (Employee _ _ s) = s

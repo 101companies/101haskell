@@ -1,17 +1,19 @@
 name:                haskellList
 version:             0.1.0.0
 synopsis:            List processing with map and friends in Haskell
-homepage:            101companies.org
+homepage:            http://101companies.org/wiki/Contribution:haskellList
 build-type:          Simple
 cabal-version:       >=1.9.2
 
 library
   exposed-modules:
+    Main
     Company.Data
     Company.Sample
-    Company.Cut
     Company.Total
-  build-depends:       base >=4.4 && < 5.0
+    Company.Median
+    Company.Cut
+  build-depends:       base >=4.4 && < 5.0, HUnit
   hs-source-dirs:      src
 
 test-suite basic-tests

@@ -1,8 +1,10 @@
+{- | Sample data of the 101companies System -}
+
 module Company.Sample where
 
 import Company.Data
 
--- Test data
+-- | A sample company useful for basic tests
 sampleCompany :: Company
 sampleCompany =
   ( "Acme Corporation",
