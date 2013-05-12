@@ -1,4 +1,4 @@
-{-| A data model for a simple 101companies System such that companies are flat containers of employees. -}
+{-| A data model for a simple 101companies System -}
 
 module Company.Data where
 

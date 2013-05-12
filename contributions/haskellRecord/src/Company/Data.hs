@@ -1,5 +1,4 @@
-{-| A data model for a simple 101companies System such that companies are flat containers of employees where all sorts of data are modeled by means of algebraic data types, in fact, record types, in Haskell. By means of "deriving" clauses, all types are readied for equality, showing (export to a string for output), and reading (import from a
-string for input). -}
+{-| A data model for a simple 101companies System -}
 
 module Company.Data where
 

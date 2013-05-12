@@ -1,9 +1,6 @@
 {-| The operation of totaling all salaries of all employees in a company -}
 
-module Company.Total (
-  total,
-  salaries
-) where
+module Company.Total where
 
 import Company.Data
 
