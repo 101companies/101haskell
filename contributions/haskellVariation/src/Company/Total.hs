@@ -1,28 +1,42 @@
 {-| The operation of totaling all salaries of all employees in a company -}
 
-module Company.Total (
-  total,
-  salaries
-) where
+module Company.Total where
 
 import Company.Data
 
 -- | Total all salaries in a company
 total :: Company -> Float
-total = sum . salaries
-
--- | Extract all salaries in a company
-salaries :: Company -> [Salary]
-salaries (Company _ ds) = concat (map salaries' ds)
+total (_, ds) = totalDepartments ds
   where
-    -- Extract all salaries in a department
-    salaries' :: Department -> [Salary]
-    salaries' (Department _ m sus) = getSalary m : concat (map salaries'' sus)
+
+    -- Total salaries in a list of departments
+    totalDepartments :: [Department] -> Float
+    totalDepartments [] = 0
+    totalDepartments (d:ds)
+        = totalDepartment d
+        + totalDepartments ds 
       where
-        -- Extract the salary from a sub-unit
-        salaries'' :: SubUnit -> [Salary]
-        salaries'' (EUnit e) = [getSalary e]
-        salaries'' (DUnit d) = salaries' d
-        -- Extract the salary from an employee
-        getSalary :: Employee -> Salary
-        getSalary (Employee _ _ s) = s
+
+        -- Total salaries in a department
+        totalDepartment :: Department -> Float
+        totalDepartment (_, m, sus)
+            = getSalary m
+            + totalSubunits sus
+          where
+
+            -- Total salaries in a list of subunits
+            totalSubunits :: [SubUnit] -> Float
+            totalSubunits [] = 0
+            totalSubunits (su:sus)
+                = totalSubunit su
+                + totalSubunits sus
+              where
+
+                -- Total salaries in a subunit
+                totalSubunit :: SubUnit -> Float
+                totalSubunit (Employee e) = getSalary e
+                totalSubunit (Department d) = totalDepartment d
+
+            -- Extract the salary from an employee
+            getSalary :: Employee -> Salary
+            getSalary (_, _, s) = s

@@ -13,4 +13,4 @@ cut (Company n ds) = Company n (map cutD ds)
       where
         -- Cut the salary of an employee in half
         cutE :: Employee -> Employee
-        cutE (Employee n a s) = Employee n a (s/2)
+        cutE (Employee n a s m) = Employee n a (s/2) m

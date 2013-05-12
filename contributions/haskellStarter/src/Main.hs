@@ -1,4 +1,4 @@
--- Companies as pairs of company name and employees
+-- Companies as pairs of name and employee list
 type Company = (Name, [Employee])
 
 -- Employees as triples of name, address, and salary

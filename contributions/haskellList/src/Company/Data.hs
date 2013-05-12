@@ -1,8 +1,8 @@
-{-| A data model for a simple 101companies System such that companies are flat containers of employees. -}
+{-| A data model for the 101companies System -}
 
 module Company.Data where
 
--- | Companies as pairs of company name and list of employees
+-- | Companies as pairs of company name and employee list
 type Company = (Name, [Employee])
 
 -- | Employees as triples of name, address, and salary

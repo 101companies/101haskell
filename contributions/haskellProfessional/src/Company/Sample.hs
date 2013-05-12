@@ -7,28 +7,28 @@ import Company.Data
 -- | A sample company useful for basic tests
 sampleCompany :: Company
 sampleCompany =
-  ( "Acme Corporation",
+  Company
+    "Acme Corporation"
     [
       Department "Research"
-        ("Craig", "Redmond", 123456)
+        (Employee "Craig" "Redmond" 123456 Nothing)
         []
         [
-          ("Erik", "Utrecht", 12345),
-          ("Ralf", "Koblenz", 1234)
+          (Employee "Erik" "Utrecht" 12345 (Just "Craig")),
+          (Employee "Ralf" "Koblenz" 1234 (Just "Erik"))
         ],
       Department "Development"
-        ("Ray", "Redmond", 234567)
+        (Employee "Ray" "Redmond" 234567 (Just "Craig"))
         [
           Department "Dev1"
-            ("Klaus", "Boston", 23456)
+            (Employee "Klaus" "Boston" 23456 Nothing)
             [
               Department "Dev1.1"
-                ("Karl", "Riga", 2345)
+                (Employee "Karl" "Riga" 2345  (Just "Craig"))
                 []
-                [("Joe", "Wifi City", 2344)]
+                [(Employee "Joe" "Wifi City" 2344 Nothing)]
             ]
             []
         ]
         []
     ]
-  )

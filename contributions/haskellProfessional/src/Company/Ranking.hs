@@ -10,21 +10,19 @@ ranking (Company _ ds) = and (map (ranking' Nothing) ds)
   where
     -- Helper at the department level
     ranking' :: Maybe Float -> Department -> Bool
-    ranking' v (Department _ m sus)
+    ranking' v (Department _ m ds es)
       =  maybe True (>getSalary m) v
-      && and (map (ranking'' (getSalary m)) sus)
-    -- Helper at the sub-unit level
-    ranking'' :: Float -> SubUnit -> Bool
-    ranking'' v (EUnit e) = v > getSalary e
-    ranking'' v (DUnit d) = ranking' (Just v) d
+      && and (map (ranking' (Just (getSalary m))) ds)
+      && and (map ((<getSalary m) . getSalary) es)
     -- Extract the salary of an employee
     getSalary :: Employee -> Float
-    getSalary (Employee _ _ s) = s
+    getSalary (Employee _ _ s _) = s
 
 -- | A company that violates the ranking constraint
 rankingFailSample = Company
   "Fail Industries"
   [ Department "Failure"
-      (Employee "Ubermanager" "Top Floor" 100)
-      [EUnit $ Employee "Joe Programmer" "Basement" 1000]
+      (Employee "Ubermanager" "Top Floor" 100 Nothing)
+      []
+      [Employee "Joe Programmer" "Basement" 1000 Nothing]
   ]

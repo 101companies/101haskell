@@ -1,17 +1,18 @@
 name:                haskellLambda
 version:             0.1.0.0
 synopsis:            Anonymous functions in Haskell
-homepage:            101companies.org
+homepage:            http://101companies.org/wiki/Contribution:haskellLambda
 build-type:          Simple
 cabal-version:       >=1.9.2
 
 library
   exposed-modules:
+    Main
     Company.Data
     Company.Sample
     Company.Cut
     Company.Total
-  build-depends:       base >=4.4 && < 5.0
+  build-depends:       base >=4.4 && < 5.0, HUnit
   hs-source-dirs:      src
 
 test-suite basic-tests

@@ -3,14 +3,19 @@
 module Company.Data where
 
 -- | A company consists of name and top-level departments
-type Company = (Name, [Department])
+data Company = Company Name [Department]
+ deriving (Eq, Read, Show)
 
 -- | A department consists of name, manager, sub-departments, and employees
 data Department = Department Name Manager [Department] [Employee]
  deriving (Eq, Read, Show)
 
--- | An employee consists of name, address, and salary
-type Employee = (Name, Address, Salary)
+-- | An employee consists of name, address, salary, and optional mentor
+data Employee = Employee Name Address Salary (Maybe Mentor)
+ deriving (Eq, Read, Show)
+
+-- | Mentors are specified by employee name
+type Mentor = Name
 
 -- | Managers as employees
 type Manager = Employee

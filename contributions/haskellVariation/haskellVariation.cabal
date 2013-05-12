@@ -11,10 +11,6 @@ library
     Company.Data
     Company.Sample
     Company.Total
-    Company.Median
-    Company.Cut
-    Company.Depth
-    Company.Ranking
   build-depends:       base >=4.4 && < 5.0, HUnit
   hs-source-dirs:      src
 

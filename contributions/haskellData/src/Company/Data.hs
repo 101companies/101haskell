@@ -1,12 +1,12 @@
-{-| A data model for a simple 101companies System -}
+{-| A data model for the 101companies System -}
 
 module Company.Data where
 
--- | A company consists of company name and employees
+-- | A company consists of name and employee list
 data Company = Company Name [Employee]
   deriving (Eq, Show, Read)
 
--- | An employee consists of a name, an address, and a salary
+-- | An employee consists of name, address, and salary
 data Employee = Employee Name Address Salary
   deriving (Eq, Show, Read)
 
