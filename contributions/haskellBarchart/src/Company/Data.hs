@@ -17,5 +17,8 @@ type Address = String
 -- | Salaries as floats
 type Salary = Float
 
+-- | Historical company data
+type History = [(Year, Company)]
+
 -- | Years as timestamps of historical data
 type Year = Int

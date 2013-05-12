@@ -11,7 +11,7 @@ import Company.Median
 import GHC.Float
 
 -- | Generate .png file for development of median
-chart :: String -> [(Year, Company)] -> IO ()
+chart :: String -> History -> IO ()
 chart filename versions = do
   renderableToPNGFile (toRenderable layout) 640 480 filename
   return ()

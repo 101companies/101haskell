@@ -13,7 +13,7 @@ total = sum . salaries
 
 -- | Extract all salaries in a company
 salaries :: Company -> [Salary]
-salaries (n, es) = getSalaries es
+salaries (_, es) = getSalaries es
 
 -- Extract all salaries of lists of employees
 getSalaries :: [Employee] -> [Salary]

@@ -1,15 +1,19 @@
 {-| The operation of cutting all salaries of all employees in a company in half -}
 
-module Company.Cut (
-  cut
-) where
+module Company.Cut where
 
 import Company.Data
 
 -- | Cut all salaries in a company
 cut :: Company -> Company
-cut (Company n es) = (Company n (map cutE es))
+cut (Company n es) = Company n (cutEmployees es)
   where
+
+    -- Cut the salaries of a list of employees
+    cutEmployees :: [Employee] -> [Employee]
+    cutEmployees [] = []
+    cutEmployees (e:es) = cutEmployee e : cutEmployees es
+
     -- Cut the salary of an employee in half
-    cutE :: Employee -> Employee
-    cutE (Employee n a s) = (Employee n a (s/2))
+    cutEmployee :: Employee -> Employee
+    cutEmployee (Employee n a (Salary s)) = Employee n a (Salary (s/2))

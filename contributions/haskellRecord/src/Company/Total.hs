@@ -12,9 +12,16 @@ total :: Company -> Float
 total = sum . salaries
 
 -- | Extract all salaries in a company
-salaries :: Company -> [Salary]
-salaries (Company n es) = map totalE es
+salaries :: Company -> [Float]
+salaries = getSalaries . getEmployees
   where
-    -- Extract the salary from an employee
-    totalE :: Employee -> Float
-    totalE (Employee _ _ s) = s
+
+    -- Extract all salaries of lists of employees
+    getSalaries :: [Employee] -> [Float]
+    getSalaries [] = []
+    getSalaries (e:es) = getSalary e : getSalaries es
+      where
+
+        -- Extract the salary from an employee
+        getSalary :: Employee -> Float
+        getSalary (Employee _ _ (Salary s)) = s

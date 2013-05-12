@@ -1,5 +1,3 @@
-import Data.List (sort)
-
 -- Companies as pairs of company name and employees
 type Company = (Name, [Employee])
 
@@ -46,16 +44,6 @@ getSalaries (e:es) = getSalary e : getSalaries es
 getSalary :: Employee -> Salary
 getSalary (_, _, s) = s
 
--- Median of all salaries in a company
-median :: Company -> Salary
-median = medianSorted . sort . salaries
-
--- Median of a sorted list
-medianSorted [] = error "Cannot compute median on empty list."
-medianSorted [x] = x
-medianSorted [x,y] = (x+y)/2
-medianSorted l = medianSorted (init (tail l))
-
 -- Cut all salaries in a company
 cut :: Company -> Company
 cut (n, es) = (n, cutEmployees es)
@@ -72,5 +60,4 @@ cutEmployee (n, a, s) = (n, a, s/2)
 -- Illustrative function applications
 main = do
   print (total sampleCompany)
-  print (median sampleCompany)
   print (total (cut sampleCompany))

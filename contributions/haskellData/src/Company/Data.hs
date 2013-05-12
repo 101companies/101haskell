@@ -1,4 +1,5 @@
-{-| A data model for a simple 101companies System such that companies are flat containers of employees. -}
+{-| A data model for a simple 101companies System such that companies are flat containers of employees where all sorts of data are modeled by means of algebraic data types in Haskell. By means of "deriving" clauses, all types are readied for equality, showing (export to a string for output), and reading (import from a
+string for input). -}
 
 module Company.Data where
 
@@ -11,10 +12,13 @@ data Employee = Employee Name Address Salary
   deriving (Eq, Show, Read)
 
 -- | Names as strings
-type Name = String
+data Name = Name String
+  deriving (Eq, Show, Read)
 
 -- | Addresses as strings
-type Address = String
+data Address = Address String
+  deriving (Eq, Show, Read)
 
 -- | Salaries as floats
-type Salary = Float
+data Salary = Salary Float
+  deriving (Eq, Show, Read)

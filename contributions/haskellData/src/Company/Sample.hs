@@ -7,14 +7,13 @@ import Company.Data
 -- | A sample company useful for basic tests
 sampleCompany :: Company
 sampleCompany = Company
-  "Acme Corporation"
+  (Name "Acme Corporation")
   [
-    Employee "Craig" "Redmond" 123456,
-    Employee "Erik" "Utrecht" 12345,
-    Employee "Ralf" "Koblenz" 1234,
-    Employee "Ray" "Redmond" 234567,
-    Employee "Klaus" "Boston" 23456,
-    Employee "Karl" "Riga" 2345,
-    Employee "Joe" "Wifi City" 2344
+    Employee (Name "Craig") (Address "Redmond") (Salary 123456),
+    Employee (Name "Erik") (Address "Utrecht") (Salary 12345),
+    Employee (Name "Ralf") (Address "Koblenz") (Salary 1234),
+    Employee (Name "Ray") (Address "Redmond") (Salary 234567),
+    Employee (Name "Klaus") (Address "Boston") (Salary 23456),
+    Employee (Name "Karl") (Address "Riga") (Salary 2345),
+    Employee (Name "Joe") (Address "Wifi City") (Salary 2344)
   ]
-
