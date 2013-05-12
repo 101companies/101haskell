@@ -1,6 +1,6 @@
 name:                haskellEngineer
 version:             0.1.0.0
-synopsis:            Simple software engineering for Haskell
+synopsis:            Basic software engineering for Haskell
 homepage:            http://101companies.org/wiki/Contribution:haskellEngineer
 build-type:          Simple
 cabal-version:       >=1.9.2
