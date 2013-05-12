@@ -9,6 +9,7 @@ library
     Main
     Company.Data
     Company.Sample
+    Company.Total
     Company.Median
     Company.History
   build-depends:       base >=4.4 && < 5.0, data-accessor, Chart, HUnit

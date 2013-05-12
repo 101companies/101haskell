@@ -15,4 +15,4 @@ doc:
 
 clean:
 	cabal clean
-	rm -f test.png
+	rm -f *.png

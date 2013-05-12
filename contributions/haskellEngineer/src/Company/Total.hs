@@ -9,7 +9,7 @@ total :: Company -> Float
 total = sum . salaries
   where
 
-    -- | Extract all salaries in a company
+    -- Extract all salaries in a company
     salaries :: Company -> [Salary]
     salaries (_, es) = getSalaries es
       where
