@@ -16,9 +16,4 @@ salaries = getSalaries . getEmployees
     -- Extract all salaries of lists of employees
     getSalaries :: [Employee] -> [Float]
     getSalaries [] = []
-    getSalaries (e:es) = getSalary e : getSalaries es
-      where
-
-        -- Extract the salary from an employee
-        getSalary :: Employee -> Float
-        getSalary (Employee _ _ (Salary s)) = s
+    getSalaries (e:es) = getFloat (getSalary e) : getSalaries es

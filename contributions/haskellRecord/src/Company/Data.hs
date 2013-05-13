@@ -26,5 +26,5 @@ newtype Address = Address String
   deriving (Eq, Show, Read)
 
 -- | Salaries as floats
-newtype Salary = Salary Float
+newtype Salary = Salary { getFloat :: Float }
   deriving (Eq, Show, Read)
