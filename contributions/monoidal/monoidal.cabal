@@ -1,18 +1,20 @@
 name:                monoidal
 version:             0.1.0.0
 synopsis:            Model queries in Haskell with the help of monoids 
-homepage:            101companies.org
+homepage:            http://101companies.org/wiki/Contribution:monoidal
 build-type:          Simple
 cabal-version:       >=1.9.2
 
 library
   exposed-modules:
+    Main
+    Data.Max
     Company.Data
     Company.Sample
     Company.Total
     Company.Depth
     Company.Ranking
-  build-depends:       base >=4.4 && < 5.0
+  build-depends:       base >=4.4 && < 5.0, HUnit
   hs-source-dirs:      src
 
 test-suite basic-tests

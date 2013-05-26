@@ -1,12 +1,14 @@
+{-| The operation to compute the nesting depth of departments in a company -}
+
 module Company.Depth where
 
 import Company.Data
 import Data.Monoid
 import Data.Max
 
--- Compute the nesting depth of a company
+-- | Compute the nesting depth of a company
 depth :: Company -> Int
-depth (Company _ ds) = max' (map depth' ds)
+depth (_, ds) = max' (map depth' ds)
   where
     -- Maximum of a list of natural numbers
     max' = maybe 0 id . getMax . mconcat 

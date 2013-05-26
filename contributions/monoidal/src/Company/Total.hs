@@ -1,11 +1,13 @@
+{-| The operation of totaling all salaries of all employees in a company -}
+
 module Company.Total where
 
 import Company.Data
 import Data.Monoid
 
--- Total all salaries in a company
+-- | Total all salaries in a company
 total :: Company -> Float
-total (Company n ds) = getSum (mconcat (map totalD ds))
+total (n, ds) = getSum (mconcat (map totalD ds))
   where
     -- Total all salaries in a department
     totalD :: Department -> Sum Float
@@ -14,4 +16,4 @@ total (Company n ds) = getSum (mconcat (map totalD ds))
       where
         -- Extract the salary from an employee
         totalE :: Employee -> Sum Float
-        totalE (Employee _ _ s) = Sum s
+        totalE (_, _, s) = Sum s

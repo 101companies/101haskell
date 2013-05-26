@@ -1,4 +1,5 @@
--- A data type for maxima
+{-| A monoid for optional maxima -}
+
 module Data.Max (
   Max,
   getMax,
@@ -8,18 +9,22 @@ module Data.Max (
 
 import Data.Monoid
 
--- A data type for maxima without default
-data Ord x => Max x = Max { getMax :: Maybe x }
+-- | A data type for maxima without default
+data Ord x => 
+     Max x = Max {
+       -- | Retrieve maximum, if any
+       getMax :: Maybe x 
+     }
 
--- Set max to "just" a value
+-- | Set max to "just" a value
 setMax :: Ord x => x -> Max x
 setMax = Max . Just
 
--- The absent maximum
+-- | The absent maximum
 noMax :: Ord x => Max x
 noMax = Max { getMax = Nothing }
 
--- A monoid for maxima
+-- | A monoid for maxima
 instance Ord x => Monoid (Max x)
   where
     mempty = Max Nothing

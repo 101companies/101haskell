@@ -1,6 +1,6 @@
 name:                haskellProfessional
 version:             0.1.0.0
-synopsis:            Feature-rich, idiomatic Haskell-based implementation
+synopsis:            Idiomatic implementation of several feature in Haskell
 homepage:            http://101companies.org/wiki/Contribution:haskellProfessional
 build-type:          Simple
 cabal-version:       >=1.9.2

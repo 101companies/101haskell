@@ -1,12 +1,14 @@
+{-| The constraint to check that salaries follow ranks in company hierarchy -}
+
 module Company.Ranking where
 
 import Company.Data
 import Data.Monoid
 import Data.Max
 
--- Check that salaries follow ranks in company hierarchy
+-- | Check that salaries follow ranks in company hierarchy
 ranking :: Company -> Bool
-ranking (Company _ ds) = and (map ranking' ds)
+ranking (_, ds) = and (map ranking' ds)
   where
     -- Helper at the department level
     ranking' :: Department -> Bool
@@ -28,13 +30,14 @@ ranking (Company _ ds) = and (map ranking' ds)
     getManagerSalary (Department _ m _ _) = getSalary m
     -- Extract the salary of an employee
     getSalary :: Employee -> Float
-    getSalary (Employee _ _ s) = s
+    getSalary (_, _, s) = s
 
--- A company that violates the ranking constraint
-rankingFailSample = Company
-  "Fail Industries"
-  [ Department "Failure"
-      (Employee "Ubermanager" "Top Floor" 100)
-      []
-      [Employee "Joe Programmer" "Basement" 1000]
-  ]
+-- | A company that violates the ranking constraint
+rankingFailSample =
+  ( "Fail Industries",
+    [ Department "Failure"
+        ("Ubermanager", "Top Floor", 100)
+        []
+        [("Joe Programmer", "Basement", 1000)]
+    ]
+  )
