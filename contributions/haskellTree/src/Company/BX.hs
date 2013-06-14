@@ -1,7 +1,7 @@
 module Company.BX where
 
 import Company.Data
-import Company.LLTree
+import Data.LLTree
 import Data.List
 
 get :: Company -> LLTree Float

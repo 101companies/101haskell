@@ -11,12 +11,11 @@ library
     Company.Sample
     Company.Cut
     Company.Log
-    Control.Monad.Writer
-  build-depends:       base >=4.4 && < 5.0
+  build-depends:       base >=4.4 && < 5.0, mtl
   hs-source-dirs:      src
 
 test-suite basic-tests
     main-is:           Main.hs
-    build-depends:     base, HUnit
+    build-depends:     base, HUnit, mtl
     hs-source-dirs:    src
     type:              exitcode-stdio-1.0

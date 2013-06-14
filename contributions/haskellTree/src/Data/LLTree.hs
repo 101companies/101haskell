@@ -1,6 +1,6 @@
 -- Leaf-labeled rose trees
 
-module Company.LLTree where
+module Data.LLTree where
 
 import Prelude hiding (foldr, concat)
 import Data.Functor

@@ -20,10 +20,12 @@ library
     Company.Data
     Company.Cut
     Company.Total
+    Main
   build-depends:       base >=4.4 && < 5.0,
                        mtl >= 2.1,
                        directory >= 1.1,
-                       syb >= 0.3
+                       syb >= 0.3,
+                       HUnit
   hs-source-dirs:      src, StrategyLib
 
 
