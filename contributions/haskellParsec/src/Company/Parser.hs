@@ -39,7 +39,7 @@ pDepartment = do
   return $ Department n m sus
 
 -- Parse an employee
-pEmployee :: String -> P Manager
+pEmployee :: String -> P Employee
 pEmployee ty = do
   pString ty
   n <- pLit
