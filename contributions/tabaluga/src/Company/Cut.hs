@@ -3,8 +3,8 @@ module Company.Cut where
 import Company.Data
 import Company.Algebra
 
-cut' :: Company -> Company
-cut' = foldCompany cutAlgebra
+cut :: Company -> Company
+cut = foldCompany cutAlgebra
   where
     cutAlgebra
       = mapCompany {
@@ -14,8 +14,8 @@ cut' = foldCompany cutAlgebra
 
 -- For comparison, without using mapCompany.
 
-cut :: Company -> Company
-cut = foldCompany cutAlgebra
+cut' :: Company -> Company
+cut' = foldCompany cutAlgebra
   where
     cutAlgebra :: CompanyAlgebra Company Department Employee
     cutAlgebra
