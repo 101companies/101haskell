@@ -22,7 +22,8 @@ library
     Company.Total
     Company.Depth
     Company.Algebra
-  build-depends:       base >=4.4 && < 5.0
+    Main
+  build-depends:       base >=4.4 && < 5.0, HUnit
   hs-source-dirs:      src
 
 test-suite basic-tests

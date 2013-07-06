@@ -1,50 +1,37 @@
+{-| Tests for the 101companies System -}
+
 module Main where
 
 import Company.Data
+import Company.Sample
 import Company.Total
 import Company.Cut
 import Company.Depth
 import Test.HUnit
 import System.Exit
 
-sampleCompany = Company
-  "Acme Corporation"
-  [ Department "Research"
-      (Employee "Craig" "Redmond" 123456)
-      []
-      [ Employee "Erik" "Utrecht" 12345,
-        Employee "Ralf" "Koblenz" 1234
-      ],
-    Department "Development"
-      (Employee "Ray" "Redmond" 234567)
-      [ Department "Dev1"
-          (Employee "Klaus" "Boston" 23456)
-          [ Department "Dev1.1"
-              (Employee "Karl" "Riga" 2345)
-              []
-              [ Employee "Joe" "Wifi City" 2344 ]
-          ]
-          []
-      ]
-      []
-  ]
-
+-- | Compare salary total of sample company with baseline
 totalTest = 399747.0 ~=? total sampleCompany
 
+-- | Compare total after cut of sample company with baseline
 cutTest = 199873.5 ~=? total (cut sampleCompany)
 
+-- | Compare depth of sample company with baseline
+depthTest = 3 ~=? depth sampleCompany
+
+-- | Test for round-tripping of de-/serialization of sample company
 serializationTest = sampleCompany ~=? read (show sampleCompany)
 
-depthTest = (depth sampleCompany) ~=? 3
-
+-- | The list of tests
 tests =
   TestList [
     TestLabel "total" totalTest,
     TestLabel "cut" cutTest,
-    TestLabel "serialization" serializationTest,
-    TestLabel "depth" depthTest
+    TestLabel "depth" depthTest,
+    TestLabel "serialization" serializationTest
   ]
 
+-- | Run all tests and communicate through exit code
 main = do
  counts <- runTestTT tests
  if (errors counts > 0 || failures counts > 0)
