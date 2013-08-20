@@ -4,69 +4,69 @@ import Company.Data
 import Text.Parsec
 
 -- Main parser function
-parseCompany :: String -> Either ParseError Company
-parseCompany = runP 
+parse :: String -> Either ParseError Company
+parse = runP 
                  (do
                     spaces 
-                    c <- pCompany
+                    c <- parseCompany
                     eof
                     return c
                  ) ()
                  "input"
 
 -- Shorthand for the parser type
-type P = Parsec String ()
+type Parser = Parsec String ()
 
 -- Parse a company
-pCompany :: P Company
-pCompany = do
-  pString "company"
-  n <- pLit
-  pString "{"
-  ds <- many pDepartment
-  pString "}"
+parseCompany :: Parser Company
+parseCompany = do
+  parseString "company"
+  n <- parseLiteral
+  parseString "{"
+  ds <- many parseDepartment
+  parseString "}"
   return $ Company n ds
 
 -- Parse a department
-pDepartment :: P Department
-pDepartment = do
-  pString "department"
-  n <- pLit
-  pString "{"
-  m <- pEmployee "manager"
-  sus <- many pSubUnit
-  pString "}"
+parseDepartment :: Parser Department
+parseDepartment = do
+  parseString "department"
+  n <- parseLiteral
+  parseString "{"
+  m <- parseEmployee "manager"
+  sus <- many parseSubUnit
+  parseString "}"
   return $ Department n m sus
 
+-- Parse a subunit (an employee or a department)
+parseSubUnit :: Parser SubUnit
+parseSubUnit = 
+      (parseEmployee "employee" >>= return . EUnit)
+  <|> (parseDepartment >>= return . DUnit)
+
 -- Parse an employee
-pEmployee :: String -> P Employee
-pEmployee ty = do
-  pString ty
-  n <- pLit
-  pString "{"
-  pString "address"
-  a <- pLit
-  pString "salary"
-  s <- pFloat
-  pString "}"
+parseEmployee :: String -> Parser Employee
+parseEmployee ty = do
+  parseString ty
+  n <- parseLiteral
+  parseString "{"
+  parseString "address"
+  a <- parseLiteral
+  parseString "salary"
+  s <- parseFloat
+  parseString "}"
   return $ Employee n a s
 
--- Parse a subunit (an employee or a department)
-pSubUnit :: P SubUnit
-pSubUnit = 
-      (pEmployee "employee" >>= return . EUnit)
-  <|> (pDepartment >>= return . DUnit)
-
 -- Parse a specific string
-pString :: String -> P ()
-pString s = do
+parseString :: String -> Parser ()
+parseString s = do
   string s
   spaces
   return ()
 
 -- Parse a double-quoted string
-pLit :: P String
-pLit = do 
+parseLiteral :: Parser String
+parseLiteral = do 
   string "\""
   s <- many (noneOf "\"")
   string "\""
@@ -74,8 +74,8 @@ pLit = do
   return s
 
 -- Parse a float
-pFloat :: P Float
-pFloat = do
+parseFloat :: Parser Float
+parseFloat = do
   s <- many1 (digit <|> char '.')
   spaces
   return $ read s

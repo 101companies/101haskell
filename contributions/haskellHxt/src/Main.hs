@@ -2,6 +2,7 @@ module Main where
 
 import Text.XML.HXT.Core
 import System.Exit
+import System.Directory (removeFile)
 
 import Company.Cut
 import Company.Total
@@ -28,6 +29,7 @@ main = do
 
       [ttl] <- runX ( readDocument [] "sampleCompanyCut.xml"
                       >>> total )
+      removeFile "sampleCompanyCut.xml"
       print ttl
 
         where

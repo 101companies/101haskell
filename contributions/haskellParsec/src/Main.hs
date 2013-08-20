@@ -8,7 +8,7 @@ import Test.HUnit
 import System.Exit
 
 -- Test for parsing to agree with the baseline
-parsingTest input = Just sampleCompany ~=? eitherToMaybe (parseCompany input)
+parsingTest input = Just sampleCompany ~=? eitherToMaybe (parse input)
   where
     eitherToMaybe = either (const Nothing) Just
 
