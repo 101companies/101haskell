@@ -1,7 +1,7 @@
 name:                haskellSyb
 version:             0.1.0.0
 synopsis:            Generic Programming in Haskell with SyB
-homepage:            101companies.org
+homepage:            http://101companies.org/wiki/Contribution:haskellSyb
 build-type:          Simple
 cabal-version:       >=1.9.2
 

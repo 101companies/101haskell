@@ -32,15 +32,23 @@ parseDepartment = do
   parseString "department"
   parseLiteral
   parseString "{"
-  parseEmployee "manager"
+  parseManager
   many parseSubUnit
   parseString "}"
 
 -- Accept a subunit (an employee or a department)
 parseSubUnit :: Parser
 parseSubUnit = 
-      parseEmployee "employee"
+      parseNonmanager
   <|> parseDepartment
+
+-- Accept a manager
+parseManager :: Parser
+parseManager = parseEmployee "manager"
+
+-- Accept a non-manager
+parseNonmanager :: Parser
+parseNonmanager = parseEmployee "employee"
 
 -- Accept an employee
 parseEmployee :: String -> Parser

@@ -1,7 +1,7 @@
-name:                writerMonad
+name:                haskellLogging
 version:             0.1.0.0
-synopsis:            Logging in Haskell with the Writer monad
-homepage:            101companies.org
+synopsis:            Logging in Haskell with basic (non-monadic) code
+homepage:            http://101companies.org/wiki/Contribution:haskellLogging
 build-type:          Simple
 cabal-version:       >=1.9.2
 
@@ -11,11 +11,11 @@ library
     Company.Sample
     Company.Cut
     Company.Log
-  build-depends:       base >=4.4 && < 5.0, mtl
+  build-depends:       base >=4.4 && < 5.0
   hs-source-dirs:      src
 
 test-suite basic-tests
     main-is:           Main.hs
-    build-depends:     base, HUnit, mtl
+    build-depends:     base, HUnit
     hs-source-dirs:    src
     type:              exitcode-stdio-1.0
