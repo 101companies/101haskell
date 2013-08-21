@@ -6,9 +6,10 @@ import Company.Cut
 import Company.Log
 import Test.HUnit
 import System.Exit
+import Control.Monad.Writer (runWriter)
 
 -- The log part after a cut
-sampleCompanyLog = snd (cut sampleCompany)
+sampleCompanyLog = snd (runWriter (cut sampleCompany))
 
 -- Compare log with baseline
 cutLogTest = baseline ~=? sampleCompanyLog

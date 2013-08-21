@@ -25,7 +25,7 @@ parseCompany = do
   parseString "{"
   ds <- many parseDepartment
   parseString "}"
-  return $ Company n ds
+  return (Company n ds)
 
 -- Parse a department
 parseDepartment :: Parser Department
@@ -36,7 +36,7 @@ parseDepartment = do
   m <- parseEmployee "manager"
   sus <- many parseSubUnit
   parseString "}"
-  return $ Department n m sus
+  return (Department n m sus)
 
 -- Parse a subunit (an employee or a department)
 parseSubUnit :: Parser SubUnit
@@ -55,7 +55,7 @@ parseEmployee ty = do
   parseString "salary"
   s <- parseFloat
   parseString "}"
-  return $ Employee n a s
+  return (Employee n a s)
 
 -- Parse a specific string
 parseString :: String -> Parser ()

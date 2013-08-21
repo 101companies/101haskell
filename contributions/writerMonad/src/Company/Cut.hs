@@ -2,13 +2,13 @@ module Company.Cut where
 
 import Company.Data
 import Company.Log
-import Control.Monad.Writer
+import Control.Monad.Writer (Writer, tell)
 
 -- Cut all salaries in a company and log all salaries changes
-cut :: Company -> (Company, Log)
-cut (Company n ds)
-  = let (ds',log) = runWriter (mapM cutD ds) in
-      (Company n ds', log)
+cut :: Company -> Writer Log Company
+cut (Company n ds) =
+    mapM cutD ds >>= \ds' -> 
+    return (Company n ds')
   where
     -- Cut all salaries in a department
     cutD :: Department -> Writer Log Department
@@ -33,10 +33,11 @@ cut (Company n ds)
                 return (Employee n a s')
 
 -- A variant using do notation
-cut' :: Company -> (Company, Log)
-cut' (Company n ds)
-  = let (ds',log) = runWriter (mapM cutD ds) in
-      (Company n ds', log)
+cut' :: Company -> Writer Log Company
+cut' (Company n ds) =
+  do
+     ds' <- mapM cutD ds
+     return (Company n ds')
   where
     cutD :: Department -> Writer Log Department
     cutD (Department n m ds es) =
