@@ -16,8 +16,8 @@ total (_, ds) = sum (map totalDepartment ds)
       where
         -- Total salaries in a subunit
         totalSubunit :: SubUnit -> Float
-        totalSubunit (Employee e) = getSalary e
-        totalSubunit (Department d) = totalDepartment d
+        totalSubunit s
+          = getSubUnit s getSalary totalDepartment
 
         -- Extract the salary from an employee
         getSalary :: Employee -> Salary
