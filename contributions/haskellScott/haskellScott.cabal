@@ -1,6 +1,6 @@
 name:                haskellScott
 version:             0.1.0.0
-synopsis:            Exercise Scott encoding
+synopsis:            Exercise Scott encoding in Haskell
 homepage:            http://101companies.org/wiki/Contribution:haskellScott
 build-type:          Simple
 cabal-version:       >=1.9.2
