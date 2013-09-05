@@ -1,0 +1,29 @@
+name:                haskellSpec
+version:             0.1.0.0
+synopsis:            Applying specification theory to Haskell
+homepage:            http://101companies.org/wiki/Contribution:haskellSpec
+build-type:          Simple
+cabal-version:       >=1.9.2
+
+library
+  exposed-modules:
+    Company.Signature
+    Company.Properties
+    Company.Definitions
+    Company.Implementation
+    Company.Sample
+    Company.Tests
+  build-depends:       base,
+                       test-framework,
+                       HUnit, test-framework-hunit,
+                       QuickCheck, test-framework-quickcheck2
+  hs-source-dirs:      src
+
+test-suite basic-tests
+  main-is:             Main.hs
+  build-depends:       base,
+                       test-framework,
+                       HUnit, test-framework-hunit,
+                       QuickCheck, test-framework-quickcheck2
+  hs-source-dirs:      src
+  type:                exitcode-stdio-1.0
