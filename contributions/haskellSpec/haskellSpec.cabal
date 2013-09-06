@@ -9,7 +9,6 @@ library
   exposed-modules:
     Company.Signature
     Company.Properties
-    Company.Definitions
     Company.Implementation
     Company.Sample
     Company.Tests

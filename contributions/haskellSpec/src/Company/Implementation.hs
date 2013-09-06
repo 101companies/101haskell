@@ -1,17 +1,43 @@
 {- | Implementation of the 101companies System -}
 
-module Company.Implementation where
+module Company.Implementation (
+  system,
+  Company, mkCompany,
+  Employee, mkEmployee,
+  Name,
+  Address,
+  Salary,
+  Format
+) where
 
 import Company.Signature
-import Company.Definitions
+import Company.Properties
 
 -- | Companies as pairs of name and employee list
 data Company = Company Name [Employee]
   deriving (Eq, Show, Read)
 
+-- | Invariant-aware company constructor
+mkCompany :: Name -> [Employee] -> Maybe Company
+mkCompany n es
+  = if prop_unique system c 
+      then Just c
+      else Nothing
+  where
+    c = Company n es
+
 -- | Employees as triples of name, address, and salary
 data Employee = Employee Name Address Salary
   deriving (Eq, Show, Read)
+
+-- | Invariant-aware company constructor
+mkEmployee :: Name -> Address -> Salary -> Maybe Employee
+mkEmployee n a s
+  = if prop_salary system e
+      then Just e
+      else Nothing
+  where
+    e = Employee n a s
 
 -- | Names as strings
 type Name = String
@@ -51,13 +77,20 @@ system = System {
     = \(Employee _ _ s) -> s,
 
   total
-    = def_total system,
+    = foldr (addSalaries system) (zeroSalary system)
+    . map (salaryOfEmployee system)
+    . employeesOfCompany system,
 
-  sumSalaries
-    = sum,
+  zeroSalary
+    = 0,
+
+  addSalaries
+    = (+),
 
   cut
-    = def_cut system,
+    = mapEmployees system 
+    $ updateSalary system
+    $ halveSalary system,
 
   mapEmployees 
     = \f (Company n es) -> Company n (map f es),
