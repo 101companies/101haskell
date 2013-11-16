@@ -15,10 +15,10 @@ parse = runP
                  "input"
 
 -- Shorthand for the parser type
-type Parser = Parsec String () ()
+type Acceptor = Parsec String () ()
 
 -- Accept a company
-parseCompany :: Parser
+parseCompany :: Acceptor
 parseCompany = do
   parseString "company"
   parseLiteral
@@ -27,7 +27,7 @@ parseCompany = do
   parseString "}"
 
 -- Accept a department
-parseDepartment :: Parser
+parseDepartment :: Acceptor
 parseDepartment = do
   parseString "department"
   parseLiteral
@@ -37,21 +37,22 @@ parseDepartment = do
   parseString "}"
 
 -- Accept a subunit (an employee or a department)
-parseSubUnit :: Parser
+parseSubUnit :: Acceptor
 parseSubUnit = 
       parseNonmanager
   <|> parseDepartment
 
+
 -- Accept a manager
-parseManager :: Parser
+parseManager :: Acceptor
 parseManager = parseEmployee "manager"
 
 -- Accept a non-manager
-parseNonmanager :: Parser
+parseNonmanager :: Acceptor
 parseNonmanager = parseEmployee "employee"
 
 -- Accept an employee
-parseEmployee :: String -> Parser
+parseEmployee :: String -> Acceptor
 parseEmployee ty = do
   parseString ty
   parseLiteral
@@ -63,14 +64,14 @@ parseEmployee ty = do
   parseString "}"
 
 -- Accept a specific string
-parseString :: String -> Parser
+parseString :: String -> Acceptor
 parseString s = do
   string s
   spaces
   return ()
 
 -- Accept a double-quoted string
-parseLiteral :: Parser
+parseLiteral :: Acceptor
 parseLiteral = do 
   string "\""
   s <- many (noneOf "\"")
@@ -79,7 +80,7 @@ parseLiteral = do
   return ()
 
 -- Accept a float
-parseFloat :: Parser
+parseFloat :: Acceptor
 parseFloat = do
   s <- many1 (digit <|> char '.')
   spaces
