@@ -15,4 +15,4 @@ doc:
 
 clean:
 	cabal clean
-	rm -f *.png
+	rm -f *.svg
