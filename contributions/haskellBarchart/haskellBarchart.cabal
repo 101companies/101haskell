@@ -12,11 +12,23 @@ library
     Company.Total
     Company.Median
     Company.History
-  build-depends:       base >=4.4 && < 5.0, data-accessor, Chart, HUnit
+  build-depends:       base >=4.4 && < 5.0,
+                       Chart >=1.2.2 && < 1.3,
+                       Chart-diagrams >=1.2.2 && < 1.3,
+                       lens >=4.1.2 && < 4.2,
+                       containers >=0.5 && < 0.6,
+                       data-default-class >=0.0.1 && <0.2,
+                       HUnit >=1.2.5.2 && < 1.3
   hs-source-dirs:      src
 
 test-suite basic-tests
     main-is:           Main.hs
-    build-depends:     base, data-accessor, Chart, HUnit
+    build-depends:     base >=4.4 && < 5.0,
+                       Chart >=1.2.2 && < 1.3,
+                       Chart-diagrams >=1.2.2 && < 1.3,
+                       lens >=4.1.2 && < 4.2,
+                       containers >=0.5 && < 0.6,
+                       data-default-class >=0.0.1 && <0.2,
+                       HUnit >=1.2.5.2 && < 1.3
     hs-source-dirs:    src
     type:              exitcode-stdio-1.0
