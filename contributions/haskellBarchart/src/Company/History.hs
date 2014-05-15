@@ -5,24 +5,28 @@ module Company.History (
 ) where
 
 import Graphics.Rendering.Chart
-import Data.Accessor
+import Graphics.Rendering.Chart.Backend.Diagrams
+import Data.Default.Class
+import Control.Lens
 import GHC.Float
+import Data.Map (empty)
 
 -- | Generate .png file for development of median
 chart :: String -> String -> [(Int,Float)] -> IO ()
 chart filename title values = do
-  renderableToPNGFile (toRenderable layout) 640 480 filename
+  let fileoptions = FileOptions (640,480) SVG empty
+  renderableToFile fileoptions (toRenderable layout) filename
   return ()
     where
       layout
-        = layout1_title ^= "Development of salaries over the years"
-        $ layout1_plots ^= [ Left (plotBars bars) ]
-        $ defaultLayout1 :: Layout1 Int Double
+        = def
+        & layout_title .~ "Development of salaries over the years"
+        & layout_plots .~ [plotBars bars]
       bars
-        = plot_bars_titles ^= [title]
-        $ plot_bars_spacing ^= BarsFixGap 42 101
-        $ plot_bars_style ^= BarsStacked
-        $ plot_bars_values ^= values'
-        $ defaultPlotBars
+        = def
+        & plot_bars_titles  .~ [title]
+        & plot_bars_spacing .~ BarsFixGap 42 101
+        & plot_bars_style   .~ BarsStacked
+        & plot_bars_values  .~ values'
       values'
         = map (\(y,f) -> (y, [float2Double f])) values

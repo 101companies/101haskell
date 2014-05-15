@@ -10,12 +10,12 @@ import Test.HUnit
 import System.Exit
 
 -- | Build the barchart for total over the years
-chartTotalTest = TestCase $ chart "total.png" "Total" totals
+chartTotalTest = TestCase $ chart "total.svg" "Total" totals
  where
   totals = map (\(y,c) -> (y, total c)) sampleCompany
 
 -- | Build the barchart for median over the years
-chartMedianTest = TestCase $ chart "median.png" "Median" medians
+chartMedianTest = TestCase $ chart "median.svg" "Median" medians
  where
   medians = map (\(y,c) -> (y, median c)) sampleCompany
 
