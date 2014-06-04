@@ -4,10 +4,22 @@ module Company.Cut where
 
 import Company.Data
 
-import Control.Lens (Traversal',over,traversed,from)
+import Control.Lens (Setter',over,traversed,from,setting,transformOnOf)
 
+-- | Cut all salaries in a company
 cut :: Company -> Company
-cut = over companySalaries (/2)
+cut = over (allCompanyDepartments.departmentSalaries) (/2)
 
-companySalaries :: Traversal' Company Float
-companySalaries = companydepartments.traversed.employees.traversed.employeesalary.from salary
+-- | Recursively modify all departments in a company
+allCompanyDepartments :: Setter' Company Department
+allCompanyDepartments = setting (transformOnOf (companydepartments.traversed) (subdepartments.traversed))
+
+-- | Modify all salaries in a department
+departmentSalaries :: Setter' Department Float
+departmentSalaries = allDepartmentEmployees.employeesalary.from salary
+
+-- | Modify all employees in a department including the manager
+allDepartmentEmployees :: Setter' Department Employee
+allDepartmentEmployees = setting (\f -> over (employees.traversed) f . over (departmentmanager.from manager) f)
+
+
