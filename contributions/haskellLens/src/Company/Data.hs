@@ -29,7 +29,6 @@ makeLenses ''Employee
 newtype Manager = Manager Employee deriving (Eq, Read, Show)
 makeIso ''Manager
 
-
 -- | A department consists of name, manager, sub-departments, and employees
 data Department = Department {
     _departmentname :: Name,
