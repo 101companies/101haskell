@@ -4,10 +4,15 @@ module Company.Total where
 
 import Company.Data
 
-import Control.Lens (Traversal',sumOf,traversed,from)
+import Control.Lens (Fold,sumOf,traversed,from,universeOnOf,folding,beside,Lens')
+import Control.Lens.Reified (ReifiedFold(Fold,runFold))
+import Control.Applicative ((<|>))
 
 total :: Company -> Float
-total = sumOf companySalaries
+total = sumOf (folding allCompanyDepartments . departmentSalaries)
 
-companySalaries :: Traversal' Company Float
-companySalaries = companydepartments.traversed.employees.traversed.employeesalary.from salary
+allCompanyDepartments :: Company -> [Department]
+allCompanyDepartments = universeOnOf (companydepartments.traversed) (subdepartments.traversed)
+
+departmentSalaries :: Fold Department Float
+departmentSalaries = runFold (Fold (departmentmanager.from manager) <|> Fold (employees.traversed)).employeesalary.from salary
