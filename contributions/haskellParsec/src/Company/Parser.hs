@@ -5,38 +5,33 @@ import Text.Parsec
 
 -- Main parser function
 parse :: String -> Either ParseError Company
-parse = runP 
-                 (do
-                    spaces 
-                    c <- parseCompany
-                    eof
-                    return c
-                 ) ()
-                 "input"
+parse = runP parseCompany () "input"
 
 -- Shorthand for the parser type
 type Parser = Parsec String ()
 
 -- Parse a company
 parseCompany :: Parser Company
-parseCompany = do
-  parseString "company"
-  n <- parseLiteral
-  parseString "{"
-  ds <- many parseDepartment
-  parseString "}"
-  return (Company n ds)
+parseCompany
+  =   spaces 
+  >>  parseString "company"
+  >>  parseLiteral
+  >>= \n -> parseString "{"
+  >>  many parseDepartment
+  >>= \ds -> parseString "}"
+  >>  eof
+  >>  return (Company n ds)
 
 -- Parse a department
 parseDepartment :: Parser Department
-parseDepartment = do
-  parseString "department"
-  n <- parseLiteral
-  parseString "{"
-  m <- parseEmployee "manager"
-  sus <- many parseSubUnit
-  parseString "}"
-  return (Department n m sus)
+parseDepartment
+  =   parseString "department"
+  >>  parseLiteral
+  >>= \n -> parseString "{"
+  >>  parseEmployee "manager"
+  >>= \m -> many parseSubUnit
+  >>= \sus -> parseString "}"
+  >>  return (Department n m sus)
 
 -- Parse a subunit (an employee or a department)
 parseSubUnit :: Parser SubUnit
@@ -46,36 +41,38 @@ parseSubUnit =
 
 -- Parse an employee
 parseEmployee :: String -> Parser Employee
-parseEmployee ty = do
-  parseString ty
-  n <- parseLiteral
-  parseString "{"
-  parseString "address"
-  a <- parseLiteral
-  parseString "salary"
-  s <- parseFloat
-  parseString "}"
-  return (Employee n a s)
+parseEmployee ty
+  =   parseString ty
+  >>  parseLiteral
+  >>= \n -> parseString "{"
+  >>  parseString "address"
+  >>  parseLiteral
+  >>= \a -> parseString "salary"
+  >>  parseFloat
+  >>= \s -> parseString "}"
+  >>  return (Employee n a s)
 
 -- Parse a specific string
 parseString :: String -> Parser ()
-parseString s = do
-  string s
-  spaces
-  return ()
+parseString s
+  =  string s
+  >> spaces
+  >> return ()
 
 -- Parse a double-quoted string
 parseLiteral :: Parser String
-parseLiteral = do 
-  string "\""
-  s <- many (noneOf "\"")
-  string "\""
-  spaces
-  return s
+parseLiteral
+  =   string "\""
+  >>  many (noneOf "\"")
+  >>= \s -> string "\""
+  >>  spaces
+  >>  return s
 
 -- Parse a float
 parseFloat :: Parser Float
-parseFloat = do
-  s <- many1 (digit <|> char '.')
-  spaces
-  return $ read s
+parseFloat
+  =   many1 digit
+  >>= \ds1 -> char '.'
+  >>  many1 digit
+  >>= \ds2 -> spaces
+  >>  return (read (ds1++'.':ds2) :: Float)

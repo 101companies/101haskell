@@ -1,45 +1,39 @@
-{-# LANGUAGE ScopedTypeVariables #-} 
 module Company.Parser where
 
 import Text.Parsec
 
 -- Main parser function
 parse :: String -> Either ParseError ()
-parse = runP 
-                 (do
-                    spaces 
-                    c <- parseCompany
-                    eof
-                    return c
-                 ) ()
-                 "input"
+parse = runP parseCompany () "input"
 
--- Shorthand for the parser type
+-- The parser type for simple acceptors
 type Acceptor = Parsec String () ()
 
 -- Accept a company
 parseCompany :: Acceptor
-parseCompany = do
-  parseString "company"
-  parseLiteral
-  parseString "{"
-  many parseDepartment
-  parseString "}"
+parseCompany
+  =  spaces 
+  >> parseString "company"
+  >> parseLiteral
+  >> parseString "{"
+  >> many parseDepartment
+  >> parseString "}"
+  >> eof
 
 -- Accept a department
 parseDepartment :: Acceptor
-parseDepartment = do
-  parseString "department"
-  parseLiteral
-  parseString "{"
-  parseManager
-  many parseSubUnit
-  parseString "}"
+parseDepartment
+  =  parseString "department"
+  >> parseLiteral
+  >> parseString "{"
+  >> parseManager
+  >> many parseSubUnit
+  >> parseString "}"
 
 -- Accept a subunit (an employee or a department)
 parseSubUnit :: Acceptor
-parseSubUnit = 
-      parseNonmanager
+parseSubUnit
+  =   parseNonmanager
   <|> parseDepartment
 
 
@@ -53,36 +47,37 @@ parseNonmanager = parseEmployee "employee"
 
 -- Accept an employee
 parseEmployee :: String -> Acceptor
-parseEmployee ty = do
-  parseString ty
-  parseLiteral
-  parseString "{"
-  parseString "address"
-  parseLiteral
-  parseString "salary"
-  parseFloat
-  parseString "}"
+parseEmployee ty
+  =  parseString ty
+  >> parseLiteral
+  >> parseString "{"
+  >> parseString "address"
+  >> parseLiteral
+  >> parseString "salary"
+  >> parseFloat
+  >> parseString "}"
 
 -- Accept a specific string
 parseString :: String -> Acceptor
-parseString s = do
-  string s
-  spaces
-  return ()
+parseString s
+  =  string s
+  >> spaces
+  >> return ()
 
 -- Accept a double-quoted string
 parseLiteral :: Acceptor
-parseLiteral = do 
-  string "\""
-  s <- many (noneOf "\"")
-  string "\""
-  spaces
-  return ()
+parseLiteral
+  =  string "\""
+  >> many (noneOf "\"")
+  >> string "\""
+  >> spaces
+  >> return ()
 
 -- Accept a float
 parseFloat :: Acceptor
-parseFloat = do
-  s <- many1 (digit <|> char '.')
-  spaces
-  let (_::Float) = read s
-  return ()
+parseFloat
+  =  many1 digit
+  >> char '.'
+  >> many1 digit
+  >> spaces
+  >> return ()
