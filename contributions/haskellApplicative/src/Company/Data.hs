@@ -1,6 +1,6 @@
 module Company.Data where
 
--- Named companies with (top-level) departments
+-- | A company consists of name and top-level departments
 data Company = Company Name [Department]
  deriving (Eq, Read, Show)
 
@@ -8,7 +8,7 @@ data Company = Company Name [Department]
 data Department = Department Name Manager [SubUnit]
  deriving (Eq, Read, Show)
 
--- Employees with name, address, and salary
+-- | An employee consists of name, address, and salary
 data Employee = Employee Name Address Salary
  deriving (Eq, Read, Show)
 

@@ -2,7 +2,7 @@
 
 module Company.Data where
 
--- | Companies as pairs of name and employee list
+-- | Companies as pairs of company name and employee list
 type Company = (Name, [Employee])
 
 -- | Employees as triples of name, address, and salary

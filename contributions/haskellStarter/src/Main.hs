@@ -4,7 +4,7 @@ type Company = (Name, [Employee])
 -- | Employees as triples of name, address, and salary
 type Employee = (Name, Address, Salary)
 
--- Names as strings
+-- | Names as strings
 type Name = String
 
 -- | Addresses as strings

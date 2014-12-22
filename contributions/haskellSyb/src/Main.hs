@@ -18,10 +18,10 @@ totalTest = 399747.0 ~=? total sampleCompany
 -- Compare total after cut with baseline
 cutTest = 199873.5 ~=? total (cut sampleCompany)
 
--- Compare depth of sample company with baseline
+-- | Compare depth of sample company with baseline
 depthTest = 3 ~=? depth sampleCompany
 
--- Check ranking constraint for salaries
+-- | Check ranking constraint for salaries of sample company
 rankingOkTest =  True ~=? ranking sampleCompany
 
 -- Negative test case for ranking constraint
