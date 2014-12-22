@@ -9,10 +9,10 @@ import Company.Ranking
 import Test.HUnit
 import System.Exit
 
--- Test for round-tripping of de-/serialization
+-- | Test for round-tripping of de-/serialization of sample company
 serializationTest = sampleCompany ~=? read (show sampleCompany)
 
--- Compare salary total with baseline
+-- | Compare salary total of sample company with baseline
 totalTest = 399747.0 ~=? total sampleCompany
 
 -- Compare total after cut with baseline
@@ -37,6 +37,7 @@ tests =
     TestLabel "rankingFail" rankingFailTest
   ]
 
+-- | Run all tests and communicate through exit code
 main = do
  counts <- runTestTT tests
  if (errors counts > 0 || failures counts > 0)

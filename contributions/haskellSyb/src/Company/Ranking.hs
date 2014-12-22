@@ -21,12 +21,12 @@ ranking (Company _ ds) =
       getSalary :: Employee -> Float
       getSalary (Employee _ _ s) = s
 
--- A company that violates the ranking constraint
-rankingFailSample = Company
-  "Fail Industries"
-  [ Department "Failure"
-      (Employee "Ubermanager" "Top Floor" 100)
-      []
-      [Employee "Joe Programmer" "Basement" 1000]
-  ]
-
+-- | A company that violates the ranking constraint
+rankingFailSample =
+  ( "Fail Industries",
+    [ Department "Failure"
+        ("Ubermanager", "Top Floor", 100)
+        []
+        [("Joe Programmer", "Basement", 1000)]
+    ]
+  )

@@ -45,6 +45,7 @@ tests =
     TestLabel "depth" depthTest
   ]
 
+-- | Run all tests and communicate through exit code
 main = do
  counts <- runTestTT tests
  if (errors counts > 0 || failures counts > 0)

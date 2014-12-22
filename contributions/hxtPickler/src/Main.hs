@@ -29,6 +29,7 @@ serializationTest = TestCase (do
                   )
   assertEqual "for the serialization of the sample company" sampleCompany company2)
 
+-- | The list of tests
 tests =
   TestList [
     TestLabel "total" totalTest,
@@ -36,6 +37,7 @@ tests =
     TestLabel "serialization" serializationTest
   ]
 
+-- | Run all tests and communicate through exit code
 main = do
  counts <- runTestTT tests
  if (errors counts > 0 || failures counts > 0)

@@ -14,7 +14,7 @@ import System.Exit
 totalTest = 399747.0 ~=? total sampleCompany
 
 -- | Compare total after cut of sample company with baseline
-cutTest = 199873.5 ~=? total (cut sampleCompany)
+cutTest = total sampleCompany / 2 ~=? total (cut sampleCompany)
 
 -- | Compare depth of sample company with baseline
 depthTest = 3 ~=? depth sampleCompany

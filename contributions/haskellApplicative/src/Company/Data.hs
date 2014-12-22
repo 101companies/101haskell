@@ -16,14 +16,14 @@ data Employee = Employee Name Address Salary
 data SubUnit = EUnit Employee | DUnit Department
  deriving (Eq, Read, Show)
 
--- Managers as employees
+-- | Managers as employees
 type Manager = Employee
 
--- Names of companies, departments, and employees
+-- | Names of companies, departments, and employees
 type Name = String
 
--- Addresses as strings
+-- | Addresses as strings
 type Address = String
 
--- Salaries as floats
+-- | Salaries as floats
 type Salary = Float

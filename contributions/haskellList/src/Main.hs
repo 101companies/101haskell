@@ -13,7 +13,7 @@ import System.Exit
 totalTest = 399747.0 ~=? total sampleCompany
 
 -- | Compare total after cut of sample company with baseline
-cutTest = 199873.5 ~=? total (cut sampleCompany)
+cutTest = total sampleCompany / 2 ~=? total (cut sampleCompany)
 
 -- | Test for round-tripping of de-/serialization of sample company
 serializationTest = sampleCompany ~=? read (show sampleCompany)

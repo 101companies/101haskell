@@ -19,7 +19,7 @@ depthTest = 3 ~=? depth sampleCompany
 -- | Check ranking constraint for salaries of sample company
 rankingOkTest =  True ~=? ranking sampleCompany
 
--- | Negative test case for ranking constraint
+-- Negative test case for ranking constraint
 rankingFailTest = False ~=? ranking rankingFailSample
 
 -- | Test for round-tripping of de-/serialization of sample company
