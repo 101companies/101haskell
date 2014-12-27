@@ -26,7 +26,7 @@ mkCompany n es
   where
     c = Company n es
 
--- | Employees as triples of name, address, and salary
+-- | An employee consists of name, address, and salary
 data Employee = Employee Name Address Salary
   deriving (Eq, Show, Read)
 

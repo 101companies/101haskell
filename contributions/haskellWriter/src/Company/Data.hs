@@ -10,7 +10,7 @@ data Department = Department Name Manager [Department] [Employee]
 
 -- | An employee consists of name, address, and salary
 data Employee = Employee Name Address Salary
- deriving (Eq, Read, Show)
+ deriving (Eq, Show, Read)
 
 -- | Managers as employees
 type Manager = Employee

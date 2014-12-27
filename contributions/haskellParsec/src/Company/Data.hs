@@ -10,7 +10,7 @@ data Department = Department Name Manager [SubUnit]
 
 -- | An employee consists of name, address, and salary
 data Employee = Employee Name Address Salary
- deriving (Eq, Read, Show)
+ deriving (Eq, Show, Read)
 
 -- Sub-units as either employees or sub-departments
 data SubUnit = EUnit Employee | DUnit Department
