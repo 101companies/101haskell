@@ -15,7 +15,7 @@ gui = do
                , fontWeight := WeightBold
                , fontUnderline := False
                , position := Point 50 50]
-    viewCompany f CompanyFocus company 
+    viewCompany f CompanyFocus sampleCompany
  
 -- start the GUI   
 main :: IO ()

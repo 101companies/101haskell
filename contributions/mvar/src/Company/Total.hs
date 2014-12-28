@@ -1,10 +1,10 @@
-module Total where
+module Company.Total where
 
 import Control.Concurrent
 import Control.Monad
 
-import Company
-import Utils
+import Company.Data
+import Company.Utils
              
 totalCompany :: Company -> IO Float
 totalCompany (Company _ depts) = do

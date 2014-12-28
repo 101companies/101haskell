@@ -39,8 +39,8 @@ viewPart v f = do
         c <- readCCookie
         displayPart v f c []
     , do
-        addCookie Session (mkCookie "company" (show company))
-        displayPart v f company []
+        addCookie Session (mkCookie "company" (show sampleCompany))
+        displayPart v f sampleCompany []
     ]
 
 -- respond to a cut request by cutting and displaying    

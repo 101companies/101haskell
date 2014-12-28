@@ -7,7 +7,7 @@ import SampleCompany
 
 main = do
       -- print total
-      print $ total company
+      print $ total sampleCompany
 
       -- print cut total
-      print $ total (cut company)
+      print $ total (cut sampleCompany)

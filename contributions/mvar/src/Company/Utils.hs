@@ -1,4 +1,4 @@
-module Utils where
+module Company.Utils where
 
 import Control.Concurrent
 

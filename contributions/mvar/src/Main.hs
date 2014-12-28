@@ -1,15 +1,15 @@
 module Main where
 
-import Company
-import SampleCompany
-import Total
-import Cut
+import Company.Data
+import Company.SampleCompany
+import Company.Total
+import Company.Cut
 
 main = do
-   oldTotal <- totalCompany company
+   oldTotal <- totalCompany sampleCompany
    print oldTotal
    
-   cutC <- cutCompany company
+   cutC <- cutCompany sampleCompany
    
    newTotal <- totalCompany cutC
    print newTotal

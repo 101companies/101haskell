@@ -13,7 +13,8 @@ type Address = String
 -- | Salaries as floats
 type Salary = Float
 
--- Test data
+-- | A sample company useful for basic tests
+sampleCompany :: Company
 sampleCompany =
   ( "Acme Corporation",
     [ 

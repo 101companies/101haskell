@@ -1,10 +1,10 @@
-module Cut where
+module Company.Cut where
 
 import Control.Concurrent
 import Control.Monad
 
-import Company 
-import Utils
+import Company.Data
+import Company.Utils
 
 cutCompany :: Company -> IO Company
 cutCompany (Company n depts) = do

@@ -10,8 +10,8 @@ import Cut
 
 main = do
 	-- total all company salaries
-	total company >>= print
+	total sampleCompany >>= print
 
 	-- cut salaries and total afterwards
-	cut company >>= total >>= print
+	cut sampleCompany >>= total >>= print
 

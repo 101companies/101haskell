@@ -41,7 +41,7 @@ upperNextDept :: Company -> Focus -> Maybe Focus
 upperNextDept c focus@(DeptFocus ns) =
     case upperFocus focus of 
         CompanyFocus -> if ((last ns) + 1 >= (length $ depts c)) then Nothing else Just (DeptFocus [(last ns) + 1])
-        focus'@(DeptFocus ns') -> if ((last ns) + 1 >= (length $ dus $ readDepartment focus' c)) then (upperNextDept company focus') else Just (DeptFocus (init ns ++ [last ns + 1]))
+        focus'@(DeptFocus ns') -> if ((last ns) + 1 >= (length $ dus $ readDepartment focus' c)) then (upperNextDept sampleCompany focus') else Just (DeptFocus (init ns ++ [last ns + 1]))
 
 -- "next" employee focus in a company
 nextEmployeeFocus :: Company -> Focus -> Maybe Focus

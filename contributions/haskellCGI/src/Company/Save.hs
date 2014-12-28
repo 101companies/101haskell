@@ -9,7 +9,7 @@ import Company.SampleCompany
 import Company.Focus
 
 -- try to read cookie or return default company
-tryReadCCookie = liftM (fromMaybe company) $
+tryReadCCookie = liftM (fromMaybe sampleCompany) $
                  readCookie "companyCookie"
 -- write cookie
 writeCCookie s = setCookie $
