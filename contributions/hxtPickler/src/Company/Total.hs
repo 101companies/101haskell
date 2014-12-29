@@ -2,8 +2,8 @@ module Company.Total where
 
 import Company.Data
 
-total :: Company -> Float
-total (Company _ ds )= sum $ map totalDept ds
+totalCompany :: Company -> Float
+totalCompany (Company _ ds )= sum $ map totalDept ds
 
 totalDept :: Department -> Float
 totalDept (Department _ m sus) = sum $ concat [ [totalEmployee m]

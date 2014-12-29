@@ -25,4 +25,4 @@ totalDept mvar (Department _ m dus eus) = do
     putMVar mvar $ totalEmployee m  + sum dusTotals + sum (map totalEmployee eus)
         
 totalEmployee :: Employee -> Float 
-totalEmployee (Employee _ _ salary) = salary
+totalEmployee (Employee _ _ s) = s

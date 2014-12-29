@@ -27,4 +27,4 @@ cutDept mvar (Department n m dus eus) = do
                                 (map cutEmployee eus)   
   
 cutEmployee :: Employee -> Employee
-cutEmployee (Employee name address salary) = Employee name address $ salary / 2
+cutEmployee (Employee n a s) = Employee n a (s/2)

@@ -3,7 +3,7 @@ module Total where
 import Company
 
 totalCompany :: Company -> Float
-totalCompany (Company _ ds )= sum $ map totalDept ds
+totalCompany (Company _ depts)= sum $ map totalDept depts
 
 totalDept :: Department -> Float
 totalDept (Department _ m dus eus) = sum $ concat [ [totalEmployee m]

@@ -13,11 +13,11 @@ samplecompanyIO = runX ( xunpickleDocument xpCompany [withRemoveWS yes] "sampleC
 
 totalTest = TestCase (do
   [sampleCompany] <- samplecompanyIO
-  assertEqual "for the total of the sample company" 399747.0 (total sampleCompany))
+  assertEqual "for the total of the sample company" 399747.0 (totalCompany sampleCompany))
 
 cutTest = TestCase (do
   [sampleCompany] <- samplecompanyIO
-  assertEqual "for the cut total of the sample company" 199873.5 (total (cut sampleCompany)))
+  assertEqual "for the cut total of the sample company" 199873.5 (totalCompany (cutCompany sampleCompany)))
 
 serializationTest = TestCase (do
   [sampleCompany] <- samplecompanyIO

@@ -13,7 +13,7 @@ module Company.Implementation (
 import Company.Signature
 import Company.Properties
 
--- | Companies as pairs of name and employee list
+-- | A company consists of name and employee list
 data Company = Company Name [Employee]
   deriving (Eq, Show, Read)
 

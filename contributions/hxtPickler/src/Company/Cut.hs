@@ -2,8 +2,8 @@ module Company.Cut where
 
 import Company.Data
 
-cut :: Company -> Company
-cut (Company n depts) = Company n $ map cutDept depts
+cutCompany :: Company -> Company
+cutCompany (Company n depts) = Company n $ map cutDept depts
 
 cutDept :: Department -> Department
 cutDept (Department n m sus) = Department n

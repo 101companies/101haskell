@@ -18,7 +18,7 @@ type Validations a = Company -> Focus -> a -> Maybe [(ENames,String)]
 data View   = CompanyV | DeptV | EmployeeV
   deriving Show
   
--- action data type
+-- data type for url action parameter data type
 data Action = View | Cut | Save
   deriving (Show, Read)
 

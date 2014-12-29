@@ -28,37 +28,37 @@ sampleCompany =
     ] 
   )
 
--- Total all salaries in a company
+-- | Total all salaries in a company
 total :: Company -> Float
 total = sum . salaries
 
--- Extract all salaries in a company
+-- | Extract all salaries in a company
 salaries :: Company -> [Salary]
 salaries (n, es) = getSalaries es
 
--- Extract all salaries of lists of employees
+-- | Extract all salaries of lists of employees
 getSalaries :: [Employee] -> [Salary]
 getSalaries [] = []
 getSalaries (e:es) = getSalary e : getSalaries es
 
--- Extract the salary from an employee
+-- | Extract the salary from an employee
 getSalary :: Employee -> Salary
 getSalary (_, _, s) = s
 
--- Cut all salaries in a company
+-- | Cut all salaries in a company
 cut :: Company -> Company
 cut (n, es) = (n, cutEmployees es)
 
--- Cut salaries for lists of employees
+-- | Cut salaries for lists of employees
 cutEmployees :: [Employee] -> [Employee]
 cutEmployees [] = []
 cutEmployees (e:es) = cutEmployee e : cutEmployees es
 
--- Cut the salary of an employee in half
+-- | Cut the salary of an employee in half
 cutEmployee :: Employee -> Employee
 cutEmployee (n, a, s) = (n, a, s/2)
 
--- Illustrative function applications
+-- | Illustrative function applications
 main = do
   print (total sampleCompany)
   print (total (cut sampleCompany))
