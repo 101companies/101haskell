@@ -12,7 +12,7 @@ type Department = (Name, Manager, [SubUnit])
 type Employee = (Name, Address, Salary)
 
 -- | A sub-unit is either an employee or a sub-department
-data SubUnit = Employee Employee | Department Department
+data SubUnit = EUnit Employee | DUnit Department
  deriving (Eq, Read, Show)
 
 -- | Managers as employees

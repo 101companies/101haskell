@@ -12,21 +12,21 @@ sampleCompany =
       ( "Research",
         ("Craig", "Redmond", 123456),
         [
-          Employee ("Erik", "Utrecht", 12345),
-          Employee ("Ralf", "Koblenz", 1234)
+          EUnit ("Erik", "Utrecht", 12345),
+          EUnit ("Ralf", "Koblenz", 1234)
         ]
       ),
       ( "Development",
         ("Ray", "Redmond", 234567),
         [
-          Department ( 
+          DUnit (
             "Dev1",
             ("Klaus", "Boston", 23456),
             [
-              Department (
+              DUnit (
                 "Dev1.1",
                 ("Karl", "Riga", 2345),
-                [Employee ("Joe", "Wifi City", 2344)]
+                [EUnit ("Joe", "Wifi City", 2344)]
               )
             ]
           )

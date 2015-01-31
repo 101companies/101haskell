@@ -18,6 +18,6 @@ cut (n, ds) = (n, (map cutD ds))
         cutE (n, a, s) = (n, a, s/2)
         -- Cut all salaries for a subunit
         cutS :: SubUnit -> SubUnit
-        cutS (Employee e) = Employee (cutE e)
-        cutS (Department d) = Department (cutD d)
+        cutS (EUnit e) = EUnit (cutE e)
+        cutS (DUnit d) = DUnit (cutD d)
 
