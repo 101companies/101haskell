@@ -38,7 +38,7 @@ system = System {
                        == getEmployeeName system e'
                       then e
                       else e'
-           in setEmployees f c,
+           in mapEmployees f c,
        setSalary = \s (Employee n a _) -> Employee n a s,
 
        -- Total salaries
@@ -52,7 +52,7 @@ system = System {
          let f e = setSalary system
                      (halveSalary system
                         (getSalary system e)) e
-           in setEmployees f c,
+           in mapEmployees f c,
 
        -- Salaries
        zeroSalary = 0,
@@ -64,9 +64,9 @@ system = System {
        deserialize = read
 
      }
-
--- | Convenience function for updating employee list
-setEmployees f c
-  = fromJust (mkCompany system
-                        (getCompanyName system c)
-                        (map f (getEmployees system c)))
+  where
+    -- Convenience function for updating employee list
+    mapEmployees f c
+      = fromJust (mkCompany system
+                            (getCompanyName system c)
+                            (map f (getEmployees system c)))
