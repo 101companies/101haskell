@@ -2,29 +2,36 @@
 
 module Company.Signature where
 
--- | Types and functions of the signature
-data System
-       company
-       employee
-       name
-       address
-       salary
-       format
+-- | Sorts and function symbols with types
 
+data System company employee name address salary format
    = System {
 
-       nameOfCompany :: company -> name,
-       employeesOfCompany :: company -> [employee],
-       nameOfEmployee :: employee -> name,
-       addressOfEmployee :: employee -> address,
-       salaryOfEmployee :: employee -> salary,
+       -- Constructors
+       mkCompany :: name -> [employee] -> Maybe company,
+       mkEmployee :: name -> address -> salary -> Maybe employee,
+
+       -- Getters
+       getCompanyName :: company -> name,
+       getEmployees :: company -> [employee],
+       getEmployeeName :: employee -> name,
+       getAddress :: employee -> address,
+       getSalary :: employee -> salary,
+
+       -- Setters
+       setEmployee :: employee -> company -> company,
+       setSalary :: salary -> employee -> employee,
+
+       -- Functionality (query and transformation)
        total :: company -> salary,
+       cut :: company -> company,
+
+       -- Salaries
        zeroSalary :: salary,
        addSalaries :: salary -> salary -> salary,
-       cut :: company -> company,
-       mapEmployees :: (employee -> employee) -> company -> company,
-       updateSalary :: (salary -> salary) -> employee -> employee,
        halveSalary :: salary -> salary,
+
+       -- De-/serialization
        serialize :: company -> format,
        deserialize :: format -> company
 

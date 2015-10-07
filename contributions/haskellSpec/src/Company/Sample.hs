@@ -2,22 +2,21 @@
 
 module Company.Sample where
 
-import Company.Implementation
+import Company.Signature
 import Data.Maybe
 
 -- | A sample company useful for basic tests
-sampleCompany :: Company
-sampleCompany = fromJust c
+sampleCompany s = fromJust c
   where
     c = do
            let n = "Acme Corporation"
            es <- sequence [
-                   mkEmployee "Craig" "Redmond" 123456,
-                   mkEmployee "Erik" "Utrecht" 12345,
-                   mkEmployee "Ralf" "Koblenz" 1234,
-                   mkEmployee "Ray" "Redmond" 234567,
-                   mkEmployee "Klaus" "Boston" 23456,
-                   mkEmployee "Karl" "Riga" 2345,
-                   mkEmployee "Joe" "Wifi City" 2344
+                   mkEmployee s "Craig" "Redmond" 123456,
+                   mkEmployee s "Erik" "Utrecht" 12345,
+                   mkEmployee s "Ralf" "Koblenz" 1234,
+                   mkEmployee s "Ray" "Redmond" 234567,
+                   mkEmployee s "Klaus" "Boston" 23456,
+                   mkEmployee s "Karl" "Riga" 2345,
+                   mkEmployee s "Joe" "Wifi City" 2344
                  ]
-           mkCompany n es
+           mkCompany s n es

@@ -1,110 +1,72 @@
-{- | Implementation of the 101companies System -}
+{- | Implementation of the functions of the 101companies System -}
 
-module Company.Implementation (
+module Company.Functions (
   system,
-  Company, mkCompany,
-  Employee, mkEmployee,
-  Name,
-  Address,
-  Salary,
-  Format
 ) where
 
 import Company.Signature
+import Company.Representation
 import Company.Properties
-
--- | A company consists of name and employee list
-data Company = Company Name [Employee]
-  deriving (Eq, Show, Read)
-
--- | Invariant-aware company constructor
-mkCompany :: Name -> [Employee] -> Maybe Company
-mkCompany n es
-  = if prop_unique system c 
-      then Just c
-      else Nothing
-  where
-    c = Company n es
-
--- | An employee consists of name, address, and salary
-data Employee = Employee Name Address Salary
-  deriving (Eq, Show, Read)
-
--- | Invariant-aware company constructor
-mkEmployee :: Name -> Address -> Salary -> Maybe Employee
-mkEmployee n a s
-  = if prop_salary system e
-      then Just e
-      else Nothing
-  where
-    e = Employee n a s
-
--- | Names as strings
-type Name = String
-
--- | Addresses as strings
-type Address = String
-
--- | Salaries as floats
-type Salary = Float
-
--- | String format
-type Format = String
+import Data.Maybe (fromJust)
 
 -- | Implementation of the system's signature
-system :: System
-            Company
-            Employee
-            Name
-            Address
-            Salary 
-            Format
+system :: System Company Employee Name Address Salary Format
 system = System {
 
-  nameOfCompany
-    = \(Company n _) -> n,
+       -- Constructors with precondition checking
+       mkCompany = \n es ->
+         let c = Company n es in
+           if prop_uname system c 
+             then Just c
+             else Nothing,
+       mkEmployee = \n a s ->
+         let e = Employee n a s in
+           if prop_nonnegative system e
+             then Just e
+             else Nothing,
 
-  employeesOfCompany
-    = \(Company _ es) -> es,
+       -- Getters defined by pattern matching
+       getCompanyName = \(Company n _) -> n,
+       getEmployees = \(Company _ es) -> es,
+       getEmployeeName = \(Employee n _ _) -> n,
+       getAddress = \(Employee _ a _) -> a,
+       getSalary = \(Employee _ _ s) -> s,
 
-  nameOfEmployee
-    = \(Employee n _ _) -> n,
+       -- Setters
+       setEmployee = \e c ->
+         let f e' = if    getEmployeeName system e
+                       == getEmployeeName system e'
+                      then e
+                      else e'
+           in setEmployees f c,
+       setSalary = \s (Employee n a _) -> Employee n a s,
 
-  addressOfEmployee
-    = \(Employee _ a _) -> a,
+       -- Total salaries
+       total
+         = foldr (addSalaries system) (zeroSalary system)
+         . map (getSalary system)
+         . getEmployees system,
 
-  salaryOfEmployee
-    = \(Employee _ _ s) -> s,
+       -- Cut salaries
+       cut = \c ->
+         let f e = setSalary system
+                     (halveSalary system
+                        (getSalary system e)) e
+           in setEmployees f c,
 
-  total
-    = foldr (addSalaries system) (zeroSalary system)
-    . map (salaryOfEmployee system)
-    . employeesOfCompany system,
+       -- Salaries
+       zeroSalary = 0,
+       addSalaries = (+),
+       halveSalary = (/2),
 
-  zeroSalary
-    = 0,
+       -- De-/serialization  
+       serialize = show,
+       deserialize = read
 
-  addSalaries
-    = (+),
+     }
 
-  cut
-    = mapEmployees system 
-    $ updateSalary system
-    $ halveSalary system,
-
-  mapEmployees 
-    = \f (Company n es) -> Company n (map f es),
-
-  updateSalary
-    = \f (Employee n a s) -> Employee n a (f s),
-
-  halveSalary
-    = (/2),
-
-  serialize
-    = show,
-
-  deserialize
-    = read
-
-}
+-- | Convenience function for updating employee list
+setEmployees f c
+  = fromJust (mkCompany system
+                        (getCompanyName system c)
+                        (map f (getEmployees system c)))

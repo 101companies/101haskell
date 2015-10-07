@@ -9,8 +9,10 @@ library
   exposed-modules:
     Company.Signature
     Company.Properties
-    Company.Implementation
+    Company.Representation
+    Company.Functions
     Company.Sample
+    Company.Generation
     Company.Tests
   build-depends:       base,
                        test-framework,

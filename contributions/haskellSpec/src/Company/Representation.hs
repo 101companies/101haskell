@@ -1,8 +1,8 @@
 {- | A specific data representation for the 101companies System -}
 
 module Company.Representation (
-  Company,
-  Employee,
+  Company(Company),
+  Employee(Employee),
   Name,
   Address,
   Salary,
