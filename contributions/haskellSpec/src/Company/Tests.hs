@@ -4,8 +4,7 @@ module Company.Tests where
 
 -- The tests neither depend on representation nor implementation.
 import Company.Signature
-import Company.Invariants
-import Company.Axioms
+import Company.Properties
 import Company.Sample
 import Test.HUnit ((@=?))
 import Test.Framework.Providers.HUnit (testCase)
@@ -32,7 +31,7 @@ tests i
       testProperty "setSalary" (prop_setSalary i),
       testProperty "add_commutative" (prop_add_commutative i),
       testProperty "zero_unit" (prop_zero_unit i),
-      testProperty "halve" (prop_halve i)
+      testProperty "halveSalary" (prop_halveSalary i)
     ]
 
   where

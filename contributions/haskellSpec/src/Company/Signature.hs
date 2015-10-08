@@ -19,8 +19,8 @@ data System company employee name address salary format
        getSalary :: employee -> salary,
 
        -- Setters
-       setEmployee :: employee -> company -> company,
-       setSalary :: salary -> employee -> employee,
+       setEmployee :: employee -> company -> Maybe company,
+       setSalary :: salary -> employee -> Maybe employee,
 
        -- Functionality (query and transformation)
        total :: company -> salary,

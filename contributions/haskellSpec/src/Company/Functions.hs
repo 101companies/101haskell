@@ -38,10 +38,11 @@ system = System {
                        == getEmployeeName system e'
                       then e
                       else e'
-           in mapEmployees f c,
+           in Just (mapEmployees f c),
 
-       --
-       setSalary = \s (Employee n a _) -> Employee n a s,
+       -- Update salary; check that salary is non-negative
+       setSalary = \s (Employee n a _) ->
+         if s >= 0 then Just (Employee n a s) else Nothing,
 
        -- Total salaries
        total
@@ -51,9 +52,9 @@ system = System {
 
        -- Cut salaries
        cut = \c ->
-         let f e = setSalary system
+         let f e = fromJust (setSalary system
                      (halveSalary system
-                        (getSalary system e)) e
+                        (getSalary system e)) e)
            in mapEmployees f c,
 
        -- Salaries

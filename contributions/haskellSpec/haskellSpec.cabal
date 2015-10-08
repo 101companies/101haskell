@@ -8,7 +8,9 @@ cabal-version:       >=1.9.2
 library
   exposed-modules:
     Company.Signature
+    Company.Properties
     Company.Invariants
+    Company.Conditions
     Company.Axioms
     Company.Representation
     Company.Functions
