@@ -6,22 +6,22 @@ module Company.Functions (
 
 import Company.Signature
 import Company.Representation
-import Company.Properties
+import Company.Invariants
 import Data.Maybe (fromJust)
 
 -- | Implementation of the system's signature
 system :: System Company Employee Name Address Salary Format
 system = System {
 
-       -- Constructors with precondition checking
+       -- Constructors enforce invariants
        mkCompany = \n es ->
          let c = Company n es in
-           if prop_uname system c 
+           if prop_company system c 
              then Just c
              else Nothing,
        mkEmployee = \n a s ->
          let e = Employee n a s in
-           if prop_nonnegative system e
+           if prop_employee system e
              then Just e
              else Nothing,
 
@@ -32,13 +32,15 @@ system = System {
        getAddress = \(Employee _ a _) -> a,
        getSalary = \(Employee _ _ s) -> s,
 
-       -- Setters
+       -- Replace employee by a map
        setEmployee = \e c ->
          let f e' = if    getEmployeeName system e
                        == getEmployeeName system e'
                       then e
                       else e'
            in mapEmployees f c,
+
+       --
        setSalary = \s (Employee n a _) -> Employee n a s,
 
        -- Total salaries

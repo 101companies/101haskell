@@ -1,43 +1,29 @@
-{- | Properties of the 101companies System -}
+{- | Axioms of the 101companies System -}
 
-module Company.Properties where
+module Company.Axioms where
 
--- The properties neither depend on representation nor implementation.
+-- The axioms are stated on top of the signature.
 import Company.Signature
-import Data.List (nub)
-
--- | An employee's salary is non-negative
-prop_nonnegative i e
-  = getSalary i e >= 0
-
--- | The employee names in a company are unique
-prop_uname i c
-  = names == unames
-      where
-        -- The list of employee names
-        names = map (getEmployeeName i) (getEmployees i c)
-        -- The list of names after removing doubles
-        unames = nub names 
 
 -- | setSalary affects salary, but not name and address
-prop_update i e s''
-  = n' == n && a' == a && s' == s''
+prop_setSalary i e s''
+     -- The salary is updated
+  =  getSalary i e' == s''
+     -- The name is NOT updated
+  && getEmployeeName i e' == getEmployeeName i e
+     -- The address is NOT updated
+  && getAddress i e' == getAddress i e
     where
+      -- Updated employee
       e' = setSalary i s'' e
-      n = getEmployeeName i e
-      a = getAddress i e
-      s = getSalary i e
-      n' = getEmployeeName i e'
-      a' = getAddress i e'
-      s' = getSalary i e'
 
 -- | The total of a company without employees is 0
-prop_no_employees i c
+prop_total_no_employees i c
   =  length (getEmployees i c) > 0 
   || total i c == 0 
 
 -- | The total is affected by cutting a salary in a specified by position
-prop_position i c p
+prop_cut_at_position i c p
  =  p < 0 -- Position must be non-negative
  || p >= length es -- Position must be below length of employee list
  || t' + s' == t -- New total plus halve salary equals old total
