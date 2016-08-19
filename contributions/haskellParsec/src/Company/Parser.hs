@@ -12,45 +12,42 @@ type Parser = Parsec String ()
 
 -- Parse a company
 parseCompany :: Parser Company
-parseCompany
-  =   spaces 
+parseCompany = Company
+  <$> (spaces 
   >>  parseString "company"
-  >>  parseLiteral
-  >>= \n -> parseString "{"
-  >>  many parseDepartment
-  >>= \ds -> parseString "}"
-  >>  eof
-  >>  return (Company n ds)
+  >>  parseLiteral)
+  <*  parseString "{"
+  <*> many parseDepartment
+  <*  parseString "}"
+  <*  eof
 
 -- Parse a department
 parseDepartment :: Parser Department
-parseDepartment
-  =   parseString "department"
-  >>  parseLiteral
-  >>= \n -> parseString "{"
-  >>  parseEmployee "manager"
-  >>= \m -> many parseSubUnit
-  >>= \sus -> parseString "}"
-  >>  return (Department n m sus)
+parseDepartment = Department
+  <$> (parseString "department"
+  >>  parseLiteral)
+  <*  parseString "{"
+  <*> parseEmployee "manager"
+  <*> many parseSubUnit
+  <*  parseString "}"
 
 -- Parse a subunit (an employee or a department)
 parseSubUnit :: Parser SubUnit
 parseSubUnit = 
-      (parseEmployee "employee" >>= return . EUnit)
-  <|> (parseDepartment >>= return . DUnit)
+      (EUnit <$> parseEmployee "employee")
+  <|> (DUnit <$> parseDepartment)
 
 -- Parse an employee
 parseEmployee :: String -> Parser Employee
-parseEmployee ty
-  =   parseString ty
-  >>  parseLiteral
-  >>= \n -> parseString "{"
-  >>  parseString "address"
-  >>  parseLiteral
-  >>= \a -> parseString "salary"
-  >>  parseFloat
-  >>= \s -> parseString "}"
-  >>  return (Employee n a s)
+parseEmployee ty = Employee
+  <$> (parseString ty
+  *>  parseLiteral)
+  <*  parseString "{"
+  <*  parseString "address"
+  <*> parseLiteral
+  <*  parseString "salary"
+  <*> parseFloat
+  <*  parseString "}"
 
 -- Parse a specific string
 parseString :: String -> Parser ()
@@ -62,17 +59,17 @@ parseString s
 -- Parse a double-quoted string
 parseLiteral :: Parser String
 parseLiteral
-  =   string "\""
-  >>  many (noneOf "\"")
-  >>= \s -> string "\""
-  >>  spaces
-  >>  return s
+  = id
+  <$> string "\""
+  *>  many (noneOf "\"")
+  <*  string "\""
+  <*  spaces
 
 -- Parse a float
 parseFloat :: Parser Float
 parseFloat
-  =   many1 digit
-  >>= \ds1 -> char '.'
-  >>  many1 digit
-  >>= \ds2 -> spaces
-  >>  return (read (ds1++'.':ds2) :: Float)
+  = (\ds1 c ds2 -> read (ds1++c:ds2))
+  <$> many1 digit
+  <*> char '.'
+  <*> many1 digit
+  <*  spaces
